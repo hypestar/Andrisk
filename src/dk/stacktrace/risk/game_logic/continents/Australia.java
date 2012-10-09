@@ -14,7 +14,6 @@ public class Australia extends Continent {
 	newGuinea,
 	westAustralia,
 	eastAustralia;
-	Board board;
 	
 	public Australia(Board board) {
 		this.board = board;

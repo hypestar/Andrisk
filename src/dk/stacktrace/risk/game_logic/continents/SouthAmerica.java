@@ -14,7 +14,6 @@ public class SouthAmerica extends Continent {
 	brazil,
 	peru,
 	argentina;
-	Board board;
 	
 	public SouthAmerica(Board board) {
 		this.board = board;

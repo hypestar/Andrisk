@@ -13,26 +13,24 @@ import android.widget.RelativeLayout;
 import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 import dk.stacktrace.risk.gui.Army;
+import dk.stacktrace.risk.gui.PlayerInfo;
 
 public class Main extends Activity {
 
 	private Controller control;
 	private ArrayList<Army> allArmies;
 	private RelativeLayout mainLayout;
+	private PlayerInfo playerInfo;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.v("MAIN", "1");
         control = new Controller();
-        Log.v("MAIN", "2");
-        control.create2PlayerTestGame();
-        Log.v("MAIN", "3");
+        control.createTestGame();
         control.dealTerritories();
-        Log.v("MAIN", "After control");
-        
         
         mainLayout = new RelativeLayout(this);
+        playerInfo = new PlayerInfo(this, control, mainLayout);
         
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -45,9 +43,7 @@ public class Main extends Activity {
         mainLayout.setBackgroundResource(R.drawable.board_colored);
 
         createArmies();
-        //mainLayout.addView(new Army(this, new Territory("Hej")));
         setContentView(mainLayout);
-        //setContentView(R.layout.activity_main);
     }
 
     private void createArmies() {
@@ -57,10 +53,13 @@ public class Main extends Activity {
     	
     	for(Territory territory : allTerritories)
     	{
-    		allArmies.add(new Army(this, territory, mainLayout));
+    		allArmies.add(new Army(this, territory, mainLayout, control));
     	}
-		
 	}
+    
+    
+    
+    
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

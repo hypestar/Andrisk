@@ -28,16 +28,23 @@ public class Controller {
 	}
 	
 	
-	public void create2PlayerTestGame()
+	public void createTestGame()
 	{
 		Player p1 = new Player("Hypestar", ArmyColor.PURPLE);
 		Player p2 = new Player("Napoleon", ArmyColor.BLUE);
 		Player p3 = new Player("Adolf", ArmyColor.GREEN);
+		Player p4 = new Player("Patton", ArmyColor.YELLOW);
+		Player p5 = new Player("Ghenkis Khan", ArmyColor.ORANGE);
+		Player p6 = new Player("Bush", ArmyColor.CYAN);
+		
 		ArrayList<Player> players = new ArrayList<Player>();
 
 		players.add(p1);
 		players.add(p2);
 		players.add(p3);
+		players.add(p4);
+		players.add(p5);
+		players.add(p6);
 		game = new RiskGame(players);
 
 		board = game.getBoard();
@@ -48,4 +55,19 @@ public class Controller {
 	{
 		game.dealTerritories();
 	}
+	
+	public int calcReinforcementBonus(Player player)
+	{
+		return board.calcReinforcementBonus(player);
+	}
+	
+	public Board getBoard() {
+		return board;
+	}
+	
+	public Player getActivePlayer()
+	{
+		return game.getActivePlayer();
+	}
+	
 }

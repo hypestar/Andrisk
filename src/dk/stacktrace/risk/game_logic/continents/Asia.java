@@ -22,14 +22,13 @@ public class Asia extends Continent {
 	middleEast,
 	india,
 	siam;
-	Board board;
+	
 	
 	public Asia(Board board) {
 		this.board = board;
 		territories = new ArrayList<Territory>();
 		reinforcementBonus = 7;
 		createTerritories();
-		//setNeighbours();
 	}
 
 	protected void createTerritories() {

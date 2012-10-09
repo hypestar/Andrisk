@@ -7,6 +7,7 @@ public class Player {
 	private String name;
 	private ArrayList<Territory> territories;
 	private ArmyColor armyColor;
+	private int reinforcement;
 
 	public Player() {
 		this("New Player", ArmyColor.BLUE);
@@ -15,6 +16,7 @@ public class Player {
 	public Player(String name, ArmyColor armyColor) {
 		this.name = name;
 		this.armyColor = armyColor;
+		reinforcement = 0;
 		
 	}
 	
@@ -42,9 +44,21 @@ public class Player {
 		return false;
 	}
 
+	public void setReinforcement(int reinforcement)
+	{
+		this.reinforcement = reinforcement;
+	}
 
+	public int getReinforcement() {
+		return reinforcement;
+	}
+	
+	public boolean hasTroopsToDeploy()
+	{
+		return reinforcement > 0;
+	}
 
-	private String getName() {
+	public String getName() {
 		return name;
 	}
 }

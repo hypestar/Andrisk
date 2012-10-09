@@ -17,8 +17,7 @@ public class Europe extends Continent {
 	southEurope,
 	westEurope,
 	ukraine;
-	Board board;
-	
+		
 	public Europe(Board board) {
 		this.board = board;
 		territories = new ArrayList<Territory>();

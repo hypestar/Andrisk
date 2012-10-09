@@ -70,6 +70,9 @@ public class RiskGame {
 		return board;
 	}
 	
+	public Player getActivePlayer() {
+		return activePlayer;
+	}
 	
 
 }

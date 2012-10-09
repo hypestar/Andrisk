@@ -2,6 +2,8 @@ package dk.stacktrace.risk.game_logic.continents;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import dk.stacktrace.risk.game_logic.Board;
 import dk.stacktrace.risk.game_logic.Player;
 import dk.stacktrace.risk.game_logic.Territory;

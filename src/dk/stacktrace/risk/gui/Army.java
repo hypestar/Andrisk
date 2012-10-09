@@ -1,25 +1,28 @@
 package dk.stacktrace.risk.gui;
 
 import android.content.Context;
-import android.graphics.Point;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import dk.stacktrace.risk.R;
+import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 
-public class Army extends RelativeLayout {
+public class Army extends RelativeLayout implements OnTouchListener{
+	private Controller control;
 	private Territory territory;
 	private ImageView armyImage;
 	private TextView armyCount;
 	private int leftMargin = 0, rightMargin = 0, topMargin = 0, bottomMargin = 0;
 	private RelativeLayout.LayoutParams armyLayoutParams;
 	
-	public Army(Context context, Territory terrritory, RelativeLayout mainLayout) {
+	public Army(Context context, Territory terrritory, RelativeLayout mainLayout, Controller control) {
 		super(context);
 		this.territory = terrritory;
-		
+		this.control = control;
 		
 		
 		// Army Layout Parameters 
@@ -48,6 +51,13 @@ public class Army extends RelativeLayout {
 		addView(armyCount, lp);
 		
 		mainLayout.addView(this);
+		setOnTouchListener(this);		
+	}
+	
+	private void reinforce(int numOfTroops)
+	{
+		territory.reinforce(numOfTroops);
+		armyCount.setText(territory.getArmySize() + "");
 	}
 
 	private void setArmyPosition() {
@@ -328,6 +338,20 @@ public class Army extends RelativeLayout {
 		default:
 			return dk.stacktrace.risk.R.drawable.army_cyan;
 		}
+	}
+
+	public boolean onTouch(View v, MotionEvent event) {
+		Army army;
+		if (v instanceof Army)
+		{
+			army = (Army) v;
+			Log.v(territory.getName(), "number of troops " + territory.getArmySize());
+			Log.v(territory.getName(), territory.getName() + " is owned by " + territory.getOwner().getName());
+			Log.v(territory.getName(), "Expected reinforcement size" + " for " + territory.getOwner().getName() + " is " + control.calcReinforcementBonus(territory.getOwner()));
+			reinforce(1);
+			
+		}
+		return false;
 	}
 	
 	

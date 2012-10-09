@@ -50,6 +50,7 @@ public class Board {
 		{
 			reinformentBonus += asia.getReinforcementBonus();
 		}
+		
 		if (europe.ownedBy(player))
 		{
 			reinformentBonus += europe.getReinforcementBonus();
@@ -70,6 +71,7 @@ public class Board {
 		{
 			reinformentBonus += africa.getReinforcementBonus();
 		}
+
 		
 		// Minimum reinforcement is 3
 		if (reinformentBonus < 3)
@@ -146,8 +148,4 @@ public class Board {
 	public Africa getAfrica() {
 		return africa;
 	}
-	
-	
-	
-	
 }

@@ -16,7 +16,7 @@ public class Africa extends Continent {
 	congo,
 	southAfrica,
 	madagascar;
-	Board board;
+	
 	
 	public Africa(Board board) {
 		this.board = board;

@@ -19,7 +19,6 @@ public class NorthAmerica extends Continent {
 	westernUS,
 	easternUS,
 	centralAmerica;
-	Board board;
 	
 	public NorthAmerica(Board board) {
 		this.board = board;
