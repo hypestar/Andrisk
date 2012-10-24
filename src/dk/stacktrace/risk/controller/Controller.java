@@ -46,7 +46,7 @@ public class Controller implements OnTouchListener{
 
 		players.add(p1);
 		players.add(p2);
-		players.add(p3);
+		//players.add(p3);
 		//players.add(p4);
 		//players.add(p5);
 		//players.add(p6);
@@ -81,29 +81,49 @@ public class Controller implements OnTouchListener{
 
 	public boolean onTouch(View v, MotionEvent event) {
 		
-		// INITIAL DEPLOYMENT PHASE
-		if (v instanceof Army && game.getGamePhase() == GamePhase.INITIAL_REINFORCEMENT)
+		if (v instanceof Army && event.getAction() == MotionEvent.ACTION_DOWN)
 		{
-			Army army = (Army) v; 
-			if (army.getTerritory().getOwner().equals(getActivePlayer()))
-			{
-				if(game.deploymentPhaseIsDone())
+			Army army = (Army) v;
+			
+			switch (game.getGamePhase()) {
+			
+			case INITIAL_REINFORCEMENT:
+				Log.v("Controller", "INITIAL_REINFORCEMENT");
+				if (army.getTerritory().getOwner().equals(getActivePlayer()))
 				{
-					game.setGamePhase(GamePhase.REINFORCEMENT);
-					Log.v("ON Touch", "Initial Deployment phase is done");
-				}
+					army.getTerritory().reinforce(getActivePlayer().deploy());
+					if(game.initialReinforcementPhaseIsDone())
+					{
+						game.setGamePhase(GamePhase.REINFORCEMENT);
+						Log.v("ON Touch", "Initial Deployment phase is done");
+					}
+					endTurn();
+					main.update();
+					return true;
+				}	
+				break;
 				
-				army.getTerritory().reinforce(getActivePlayer().deploy());
-				//main.select(army.getTerritory());
-				//main.select(army.getTerritory().getNeighbours());
-				//main.toggleHighlight(army.getTerritory().getNeighbours());
-				//army.reinforce(army.getTerritory().getOwner().deploy());
-				endTurn();
-				main.update();
-
-				return true;
+				
+			case REINFORCEMENT:
+				Log.v("Controller", "REINFORCEMENT");
+				if (army.getTerritory().getOwner().equals(getActivePlayer()))
+				{
+					army.getTerritory().reinforce(getActivePlayer().deploy());
+					if(!game.getActivePlayer().hasTroopsToDeploy())
+					{
+						game.setGamePhase(GamePhase.ATTACK);
+						Log.v("ON Touch", "Reinforcement phase is done - advancing to attack phase");
+					}
+					main.update();
+					return true;
+				}
+				break;
+			default:
+				break;
 			}
 		}
+		
+		
 		//////////////////////////////
 		
 		return false;

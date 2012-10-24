@@ -29,7 +29,7 @@ public class RiskGame {
 		
 		switch (players.size()) {
 		case 2:
-			initialReinforcement = 40;
+			initialReinforcement = 4;
 			break;
 		case 3:
 			initialReinforcement = 35;
@@ -122,7 +122,7 @@ public class RiskGame {
 		this.gamePhase = gamePhase;
 	}
 	
-	public boolean deploymentPhaseIsDone()
+	public boolean initialReinforcementPhaseIsDone()
 	{
 		for (Player player : players) 
 		{
