@@ -3,13 +3,20 @@ package dk.stacktrace.risk;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 import dk.stacktrace.risk.gui.Army;
@@ -122,7 +129,29 @@ public class Main extends Activity {
     	}
     }
    
-    
+    public void tacticalMoveDialog(String sourceTerritoryName, int sourceArmySize, String targetTerritoryName, int targetArmySize) {
+    	Dialog yourDialog = new Dialog(this);
+    	LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
+    	View layout = inflater.inflate(R.layout.dialog_tacticalmove, (ViewGroup) getCurrentFocus());
+    	yourDialog.setContentView(layout);
+    	
+    	SeekBar troopSeekBar = (SeekBar)layout.findViewById(R.id.seekBar1);
+    	TextView sourceName = (TextView) layout.findViewById(R.id.textSource);
+    	TextView sourceTroops = (TextView) layout.findViewById(R.id.textSourceTroops);
+    	TextView targetName = (TextView) layout.findViewById(R.id.textTarget);
+    	TextView targetTroops = (TextView) layout.findViewById(R.id.textTargetTroops);
+    	
+    	troopSeekBar.setMax(sourceArmySize-1);
+    	sourceName.setText(sourceTerritoryName);
+    	sourceTroops.setText(sourceArmySize + "");
+    	targetName.setText(targetTerritoryName);
+    	targetTroops.setText(targetArmySize + "");
+    	
+    	
+
+    	
+    	yourDialog.show();
+	}
     
 
 	@Override

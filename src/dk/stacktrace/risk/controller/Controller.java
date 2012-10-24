@@ -157,6 +157,7 @@ public class Controller implements OnTouchListener{
 					{
 						game.setTargetTerritory(army.getTerritory());
 						Log.v("TATICALMOVE", "Ready to move troops between " + game.getSourceTerritory().getName() + " and " + game.getTargetTerritory().getName());
+						main.tacticalMoveDialog(game.getSourceTerritory().getName(), game.getSourceTerritory().getArmySize(), game.getTargetTerritory().getName(), game.getTargetTerritory().getArmySize());
 					}
 					return true;
 				}
