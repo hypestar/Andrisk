@@ -119,6 +119,7 @@ public class Controller implements OnTouchListener{
 				}
 				break;
 				
+				
 			case ATTACK:
 				Log.v("Controller", "ATTACK");
 				if (army.getTerritory().getOwner().equals(getActivePlayer()) && game.getSourceTerritory() == null)
@@ -130,21 +131,27 @@ public class Controller implements OnTouchListener{
 				{
 					game.setTargetTerritory(army.getTerritory());
 					Log.v("ATTACK", game.getSourceTerritory().getName() + " is attacking " + game.getTargetTerritory().getName());
+					Log.v("ATTACK", "For testing purposes we are now going to tacticalmove phase");
+					game.setGamePhase(GamePhase.TACTICALMOVE);
+					game.setSourceTerritory(null);
+					game.setTargetTerritory(null);
 				}
 				break;
+				
+				
 			case TACTICALMOVE:
 				Log.v("Controller", "TACTICALMOVE");
 				if (army.getTerritory().getOwner().equals(getActivePlayer()))
 				{
 					if(army.getTerritory() == game.getSourceTerritory())
 					{
-						game.setSourceTerritory(null);
 						Log.v("TATICALMOVE", "Source territory " + game.getSourceTerritory().getName() + " has been deselected");
+						game.setSourceTerritory(null);
 					}
 					else if(game.getSourceTerritory() == null)
 					{
 						game.setSourceTerritory(army.getTerritory());
-						Log.v("TATICALMOVE", "Source territory has been set to : " + game.getSourceTerritory().getName() + " has been deselected");
+						Log.v("TATICALMOVE", "Source territory has been set to : " + game.getSourceTerritory().getName());
 					}
 					else
 					{
