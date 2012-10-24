@@ -132,6 +132,29 @@ public class Controller implements OnTouchListener{
 					Log.v("ATTACK", game.getSourceTerritory().getName() + " is attacking " + game.getTargetTerritory().getName());
 				}
 				break;
+			case TACTICALMOVE:
+				Log.v("Controller", "TACTICALMOVE");
+				if (army.getTerritory().getOwner().equals(getActivePlayer()))
+				{
+					if(army.getTerritory() == game.getSourceTerritory())
+					{
+						game.setSourceTerritory(null);
+						Log.v("TATICALMOVE", "Source territory " + game.getSourceTerritory().getName() + " has been deselected");
+					}
+					else if(game.getSourceTerritory() == null)
+					{
+						game.setSourceTerritory(army.getTerritory());
+						Log.v("TATICALMOVE", "Source territory has been set to : " + game.getSourceTerritory().getName() + " has been deselected");
+					}
+					else
+					{
+						game.setTargetTerritory(army.getTerritory());
+						Log.v("TATICALMOVE", "Ready to move troops between " + game.getSourceTerritory().getName() + " and " + game.getTargetTerritory().getName());
+					}
+					return true;
+				}
+				break;
+
 			default:
 				break;
 			}
