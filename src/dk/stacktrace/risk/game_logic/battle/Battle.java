@@ -6,14 +6,16 @@ import java.util.Collections;
 import dk.stacktrace.risk.game_logic.Territory;
 
 public class Battle {
-	private int attackingArmy, defendingArmy;
+	private int attackingArmy;
 	private Territory attackingTerritory, defendingTerritory;
 	private ArrayList<Dice> winnerDices;
 	
-	public Battle(Territory attackingTerritory, Territory defendingTerritory) 
+	public Battle(int attackingArmy, Territory attackingTerritory, Territory defendingTerritory) 
 	{
+		this.attackingArmy = attackingArmy;
 		this.attackingTerritory = attackingTerritory;
 		this.defendingTerritory = defendingTerritory;
+		
 	}
 
 	public void fight()
@@ -34,24 +36,29 @@ public class Battle {
 		for (Dice dice : attackDices)
 		{
 			dice.roll();
-			Collections.sort(attackDices, new DiceComparator());
+			Collections.sort(attackDices);
 		}
 		
 		for (Dice dice : defendDices)
 		{
 			dice.roll();
-			Collections.sort(defendDices, new DiceComparator());
+			Collections.sort(defendDices);
 		}
 		
 		winnerDices = new ArrayList<Dice>();
 		for (int i = 0; i < defendDices.size(); i++)
 		{
-			
+			if(defendDices.get(i).compareTo(attackDices.get(i)) > 0)
+			{
+				winnerDices.add(defendDices.get(i));
+				--attackingArmy;
+			}
+			else
+			{
+				winnerDices.add(attackDices.get(i));
+				defendingTerritory.kill();
+			}
 		}
-		
-		
-		
-		
 	}
 	
 	public void retreat()
@@ -81,11 +88,11 @@ public class Battle {
 
 	private int getNumOfDefendDices()
 	{
-		if(defendingArmy == 1)
+		if(defendingTerritory.getArmySize() == 1)
 		{
 			return 1;
 		}
-		else if (defendingArmy >= 2 )
+		else if (defendingTerritory.getArmySize() >= 2 )
 		{
 			return 2;	
 		}

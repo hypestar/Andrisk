@@ -12,6 +12,7 @@ public class RiskGame {
 	private ArrayList<Player> players;
 	private Player activePlayer;
 	private GamePhase gamePhase;
+	private Territory sourceTerritory, targetTerritory;
 	
 	/**
 	 * @param args
@@ -22,6 +23,8 @@ public class RiskGame {
 		board = new Board();
 		activePlayer = this.players.get(0);
 		gamePhase = GamePhase.INITIAL_REINFORCEMENT;
+		sourceTerritory = null;
+		targetTerritory = null;
 	}
 	
 	public void setInitialReinforcementForAllPlayers() {
@@ -134,5 +137,20 @@ public class RiskGame {
 		return true;
 	}
 	
+	public void setSourceTerritory(Territory sourceTerritory) {
+		this.sourceTerritory = sourceTerritory;
+	}
+	
+	public Territory getSourceTerritory() {
+		return sourceTerritory;
+	}
+	
+	public void setTargetTerritory(Territory targetTerritory) {
+		this.targetTerritory = targetTerritory;
+	}
+	
+	public Territory getTargetTerritory() {
+		return targetTerritory;
+	}
 
 }

@@ -118,6 +118,20 @@ public class Controller implements OnTouchListener{
 					return true;
 				}
 				break;
+				
+			case ATTACK:
+				Log.v("Controller", "ATTACK");
+				if (army.getTerritory().getOwner().equals(getActivePlayer()) && game.getSourceTerritory() == null)
+				{
+					game.setSourceTerritory(army.getTerritory());
+					return true;
+				}
+				else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && game.getSourceTerritory() != null)
+				{
+					game.setTargetTerritory(army.getTerritory());
+					Log.v("ATTACK", game.getSourceTerritory().getName() + " is attacking " + game.getTargetTerritory().getName());
+				}
+				break;
 			default:
 				break;
 			}

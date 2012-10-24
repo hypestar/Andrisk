@@ -94,4 +94,8 @@ public class Territory {
 	public ArrayList<Territory> getNeighbours() {
 		return neighbours;
 	}
+	
+	public void kill() {
+		--armySize;
+	}
 }
