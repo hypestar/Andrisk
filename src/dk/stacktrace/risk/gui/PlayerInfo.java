@@ -12,38 +12,66 @@ public class PlayerInfo extends RelativeLayout {
 	private Controller control;
 	private ImageView playerImage;
 	private TextView playerName;
+	private TextView expectedReinforcement;
+	private TextView deploy;
 	private RelativeLayout.LayoutParams playerInfoLayoutParams;
 	private RelativeLayout mainLayout;
+	
 	
 	public PlayerInfo(Context context, Controller control, RelativeLayout mainLayout) {
 		super(context);
 		this.control = control;
 		this.mainLayout = mainLayout;
-		playerImage = new ImageView(context);
-		playerImage.setId(0);
-		playerName = new TextView(context);
-		update();
-		
 		
 		// Player Info Layout Parameters 
 		float density = getResources().getDisplayMetrics().density;
-		playerInfoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		playerInfoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
 		playerInfoLayoutParams.leftMargin = (int) (5 * density);
 		playerInfoLayoutParams.topMargin = (int) (5 * density);
 		playerInfoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 		playerInfoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-				
 		this.setLayoutParams(playerInfoLayoutParams);
 		
+		
+		// Players army image
+		playerImage = new ImageView(context);
+		playerImage.setId(1);
+		RelativeLayout.LayoutParams armyImage_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		armyImage_lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		armyImage_lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		playerImage.setLayoutParams(armyImage_lp);
 				
-		// TextView Layout Parameters
-		RelativeLayout.LayoutParams playerNamelp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-		playerNamelp.addRule(RelativeLayout.LEFT_OF, playerImage.getId());
-		playerNamelp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-	
+		// Player name
+		playerName = new TextView(context);
+		playerName.setId(2);
+		RelativeLayout.LayoutParams playerName_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		playerName_lp.addRule(RelativeLayout.RIGHT_OF, playerImage.getId());
+		playerName_lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		playerName.setLayoutParams(playerName_lp);
+		
+		// Expected reinforcement
+		expectedReinforcement = new TextView(context);
+		expectedReinforcement.setId(3);
+		RelativeLayout.LayoutParams expectRein_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		expectRein_lp.addRule(RelativeLayout.BELOW, playerImage.getId());
+		expectRein_lp.addRule(ALIGN_PARENT_LEFT);
+		expectedReinforcement.setLayoutParams(expectRein_lp);
+
+		// Number of troops to deploy
+		deploy = new TextView(context);
+		deploy.setId(4);
+		RelativeLayout.LayoutParams deploy_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		deploy_lp.addRule(RelativeLayout.BELOW, expectedReinforcement.getId());
+		deploy_lp.addRule(ALIGN_PARENT_LEFT);
+		deploy.setLayoutParams(deploy_lp);
+		
+		update();
+		
 		addView(playerImage);
-		addView(playerName, playerNamelp);
-				
+		addView(playerName);
+		addView(expectedReinforcement);		
+		addView(deploy);
+		
 		mainLayout.addView(this);
 	}
 
@@ -72,5 +100,7 @@ public class PlayerInfo extends RelativeLayout {
 	{
 		playerImage.setImageResource(getPlayerImage());
 		playerName.setText(control.getActivePlayer().getName());
+		expectedReinforcement.setText("Expected Reinforcement : " + control.calcReinforcementBonus(control.getActivePlayer()));
+		deploy.setText("Troops to deploy : " + control.getActivePlayer().getNumOfTroopsToDeploy());
 	}
 }

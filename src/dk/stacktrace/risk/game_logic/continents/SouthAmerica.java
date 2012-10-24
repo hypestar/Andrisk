@@ -1,12 +1,12 @@
 package dk.stacktrace.risk.game_logic.continents;
 
-import dk.stacktrace.risk.game_logic.TerritoryID;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import dk.stacktrace.risk.game_logic.Board;
 import dk.stacktrace.risk.game_logic.Territory;
+import dk.stacktrace.risk.game_logic.enumerate.TerritoryID;
 
 public class SouthAmerica extends Continent {
 	private Territory

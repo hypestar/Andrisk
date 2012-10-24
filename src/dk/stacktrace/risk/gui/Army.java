@@ -11,7 +11,8 @@ import android.widget.TextView;
 import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 
-public class Army extends RelativeLayout implements OnTouchListener{
+public class Army extends RelativeLayout
+{
 	private Controller control;
 	private Territory territory;
 	private ImageView armyImage;
@@ -42,24 +43,29 @@ public class Army extends RelativeLayout implements OnTouchListener{
 		lp.addRule(RelativeLayout.CENTER_IN_PARENT);
 		
 		armyCount = new TextView(context);
-		armyCount.setText("" + this.territory.getArmySize());
-		
 		armyImage = new ImageView(context);
-		armyImage.setImageResource(getArmyColor());
-				
+		
+		update();
+		
 		addView(armyImage);
 		addView(armyCount, lp);
 		
 		mainLayout.addView(this);
-		setOnTouchListener(this);		
+		setOnTouchListener(control);		
 	}
 	
-	private void reinforce(int numOfTroops)
+	public void reinforce(int numOfTroops)
 	{
 		territory.reinforce(numOfTroops);
 		armyCount.setText(territory.getArmySize() + "");
 	}
 
+	public void update()
+	{
+		armyCount.setText("" + this.territory.getArmySize());
+		armyImage.setImageResource(getArmyColor());
+	}
+	
 	private void setArmyPosition() {
 		switch (territory.getId()) {
 		case SIB:
@@ -339,19 +345,9 @@ public class Army extends RelativeLayout implements OnTouchListener{
 			return dk.stacktrace.risk.R.drawable.army_cyan;
 		}
 	}
-
-	public boolean onTouch(View v, MotionEvent event) {
-		Army army;
-		if (v instanceof Army)
-		{
-			army = (Army) v;
-			Log.v(territory.getName(), "number of troops " + territory.getArmySize());
-			Log.v(territory.getName(), territory.getName() + " is owned by " + territory.getOwner().getName());
-			Log.v(territory.getName(), "Expected reinforcement size" + " for " + territory.getOwner().getName() + " is " + control.calcReinforcementBonus(territory.getOwner()));
-			reinforce(1);
-			
-		}
-		return false;
+	
+	public Territory getTerritory() {
+		return territory;
 	}
 	
 	

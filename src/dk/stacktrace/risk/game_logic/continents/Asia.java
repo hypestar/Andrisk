@@ -6,7 +6,7 @@ import java.util.Collections;
 import android.util.Log;
 import dk.stacktrace.risk.game_logic.Board;
 import dk.stacktrace.risk.game_logic.Territory;
-import dk.stacktrace.risk.game_logic.TerritoryID;
+import dk.stacktrace.risk.game_logic.enumerate.TerritoryID;
 
 public class Asia extends Continent {
 	private Territory 

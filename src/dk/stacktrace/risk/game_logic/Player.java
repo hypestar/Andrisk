@@ -2,6 +2,8 @@ package dk.stacktrace.risk.game_logic;
 
 import java.util.ArrayList;
 
+import dk.stacktrace.risk.game_logic.enumerate.ArmyColor;
+
 
 public class Player {
 	private String name;
@@ -17,7 +19,6 @@ public class Player {
 		this.name = name;
 		this.armyColor = armyColor;
 		reinforcement = 0;
-		
 	}
 	
 	public ArmyColor getArmyColor() {
@@ -44,12 +45,22 @@ public class Player {
 		return false;
 	}
 
-	public void setReinforcement(int reinforcement)
+	public int deploy()
 	{
-		this.reinforcement = reinforcement;
+		if(hasTroopsToDeploy())
+		{
+		--reinforcement;
+		return 1;
+		}
+		return 0;
+	}
+	
+	public void reinforcement(int reinforcement)
+	{
+		this.reinforcement += reinforcement;
 	}
 
-	public int getReinforcement() {
+	public int getNumOfTroopsToDeploy() {
 		return reinforcement;
 	}
 	

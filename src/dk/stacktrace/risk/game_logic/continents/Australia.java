@@ -5,7 +5,7 @@ import java.util.Collections;
 
 import dk.stacktrace.risk.game_logic.Board;
 import dk.stacktrace.risk.game_logic.Territory;
-import dk.stacktrace.risk.game_logic.TerritoryID;
+import dk.stacktrace.risk.game_logic.enumerate.TerritoryID;
 
 public class Australia extends Continent {
 

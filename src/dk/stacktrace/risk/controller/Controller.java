@@ -3,21 +3,26 @@ package dk.stacktrace.risk.controller;
 import java.util.ArrayList;
 
 import android.util.Log;
-
-import dk.stacktrace.risk.game_logic.ArmyColor;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import dk.stacktrace.risk.Main;
 import dk.stacktrace.risk.game_logic.Board;
 import dk.stacktrace.risk.game_logic.Player;
 import dk.stacktrace.risk.game_logic.RiskGame;
 import dk.stacktrace.risk.game_logic.Territory;
+import dk.stacktrace.risk.game_logic.enumerate.ArmyColor;
+import dk.stacktrace.risk.game_logic.enumerate.GamePhase;
+import dk.stacktrace.risk.gui.Army;
 
-public class Controller {
+public class Controller implements OnTouchListener{
 	
 	private RiskGame game;
 	private Board board;
+	private Main main;
 
-	public Controller() {
-		
-		
+	public Controller(Main main) {
+		this.main = main;
 	}
 
 	
@@ -42,13 +47,15 @@ public class Controller {
 		players.add(p1);
 		players.add(p2);
 		players.add(p3);
-		players.add(p4);
-		players.add(p5);
-		players.add(p6);
+		//players.add(p4);
+		//players.add(p5);
+		//players.add(p6);
+		
 		game = new RiskGame(players);
-
 		board = game.getBoard();
-		Log.v("2p testgame", "6");
+		
+		dealTerritories();
+		game.setInitialReinforcementForAllPlayers();
 	}
 	
 	public void dealTerritories()
@@ -68,6 +75,43 @@ public class Controller {
 	public Player getActivePlayer()
 	{
 		return game.getActivePlayer();
+	}
+
+
+
+	public boolean onTouch(View v, MotionEvent event) {
+		
+		// INITIAL DEPLOYMENT PHASE
+		if (v instanceof Army && game.getGamePhase() == GamePhase.INITIAL_REINFORCEMENT)
+		{
+			Army army = (Army) v; 
+			if (army.getTerritory().getOwner().equals(getActivePlayer()))
+			{
+				if(game.deploymentPhaseIsDone())
+				{
+					game.setGamePhase(GamePhase.REINFORCEMENT);
+					Log.v("ON Touch", "Initial Deployment phase is done");
+				}
+				
+				army.getTerritory().reinforce(getActivePlayer().deploy());
+				//main.select(army.getTerritory());
+				//main.select(army.getTerritory().getNeighbours());
+				//main.toggleHighlight(army.getTerritory().getNeighbours());
+				//army.reinforce(army.getTerritory().getOwner().deploy());
+				endTurn();
+				main.update();
+
+				return true;
+			}
+		}
+		//////////////////////////////
+		
+		return false;
+	}
+	
+	public void endTurn()
+	{
+		game.endTurn();
 	}
 	
 }

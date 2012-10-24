@@ -2,6 +2,8 @@ package dk.stacktrace.risk.game_logic;
 
 import java.util.ArrayList;
 
+import dk.stacktrace.risk.game_logic.enumerate.TerritoryID;
+
 public class Territory {
 	private String name;
 	private ArrayList<Territory> neighbours;
@@ -87,5 +89,9 @@ public class Territory {
 	
 	public TerritoryID getId() {
 		return id;
+	}
+	
+	public ArrayList<Territory> getNeighbours() {
+		return neighbours;
 	}
 }
