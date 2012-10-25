@@ -32,12 +32,10 @@ public class Territory {
 	}
 
 	public int moveTroops(int armySize)
-	{
-		Log.v("moveTroops", "Hej");
+	{ 
 		if (this.armySize -1 >= armySize)
 		{
 			this.armySize -= armySize;
-			Log.v("Territory move troops ", "Troops left " + this.armySize);
 			return this.armySize;
 		}
 		else

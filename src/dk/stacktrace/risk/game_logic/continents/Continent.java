@@ -14,7 +14,7 @@ public abstract class Continent {
 	Board board;
 	
 	public boolean ownedBy(Player player){
-		return territories.containsAll(board.getTerritoriesOwnedBy(player));
+		return board.getTerritoriesOwnedBy(player).containsAll(territories);
 	}
 	
 	public int getReinforcementBonus() {
