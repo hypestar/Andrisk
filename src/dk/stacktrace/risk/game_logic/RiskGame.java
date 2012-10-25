@@ -32,7 +32,7 @@ public class RiskGame {
 		
 		switch (players.size()) {
 		case 2:
-			initialReinforcement = 4;
+			initialReinforcement = 2;
 			break;
 		case 3:
 			initialReinforcement = 35;

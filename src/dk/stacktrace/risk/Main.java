@@ -20,7 +20,9 @@ import android.widget.TextView;
 import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 import dk.stacktrace.risk.gui.Army;
+import dk.stacktrace.risk.gui.AttackDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
+import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
 
 public class Main extends Activity {
@@ -30,7 +32,7 @@ public class Main extends Activity {
 	private RelativeLayout mainLayout;
 	private PlayerInfo playerInfo;
 	private ArrayList<TerritoryHighlight> selectedTerritories;
-	private TerritoryHighlight selectedTerritory;
+	private TerritoryHighlight selectedSourceTerritory, selectedTargetTerritory;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,11 @@ public class Main extends Activity {
 
 
         createArmies();
-        
+        selectedSourceTerritory = null;
+        selectedTargetTerritory = null;
         setContentView(mainLayout);
+        
+        
     }
 
     private void createArmies() {
@@ -82,35 +87,6 @@ public class Main extends Activity {
     	}
     }
     
-    public void select(Territory territory)
-	{
-    	if(selectedTerritory !=null)
-    	{
-    		selectedTerritory.remove();
-    	}
-    	selectedTerritory = new TerritoryHighlight(this, territory, mainLayout);
-	}
-    
-    
-    public void select(ArrayList<Territory> territories)
-    {
-
-    	if(selectedTerritories != null)
-    	{
-    		for(TerritoryHighlight territory : selectedTerritories)
-        	{
-        		territory.remove();
-        	}	
-    	}
-    	
-    	selectedTerritories = new ArrayList<TerritoryHighlight>();
-    	
-    	for(Territory territory : territories)
-    	{
-    		selectedTerritories.add(new TerritoryHighlight(this, territory, mainLayout));
-    	}
-    }
-    
     public PlayerInfo getPlayerInfo() {
 		return playerInfo;
 	}
@@ -119,6 +95,7 @@ public class Main extends Activity {
     {
     	playerInfo.update();
     	updateArmies();
+    	updateTerritorySelections();
     }
 
     public void updateArmies()
@@ -129,28 +106,47 @@ public class Main extends Activity {
     	}
     }
    
-    public void tacticalMoveDialog(String sourceTerritoryName, int sourceArmySize, String targetTerritoryName, int targetArmySize) {
-    	Dialog yourDialog = new Dialog(this);
-    	LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-    	View layout = inflater.inflate(R.layout.dialog_tacticalmove, (ViewGroup) getCurrentFocus());
-    	yourDialog.setContentView(layout);
-    	
-    	SeekBar troopSeekBar = (SeekBar)layout.findViewById(R.id.seekBar1);
-    	TextView sourceName = (TextView) layout.findViewById(R.id.textSource);
-    	TextView sourceTroops = (TextView) layout.findViewById(R.id.textSourceTroops);
-    	TextView targetName = (TextView) layout.findViewById(R.id.textTarget);
-    	TextView targetTroops = (TextView) layout.findViewById(R.id.textTargetTroops);
-    	
-    	troopSeekBar.setMax(sourceArmySize-1);
-    	sourceName.setText(sourceTerritoryName);
-    	sourceTroops.setText(sourceArmySize + "");
-    	targetName.setText(targetTerritoryName);
-    	targetTroops.setText(targetArmySize + "");
-    	
-    	
+    public void updateTerritorySelections() {
+		
+		// Source selection
+		if (control.getSourceSelection() != null)
+		{
+			if(selectedSourceTerritory != null)
+			{
+				selectedSourceTerritory.remove();
+			}
+			selectedSourceTerritory = new TerritoryHighlight(this, control.getSourceSelection(), mainLayout);
+		}
+		else if (control.getSourceSelection() == null && selectedSourceTerritory != null)
+		{
+			selectedSourceTerritory.remove();
+			selectedSourceTerritory = null;
+		}
+		
+		// Target selection
+		if (control.getTargetSelection() != null)
+		{
+			if(selectedTargetTerritory != null)
+			{
+				selectedTargetTerritory.remove();
+			}
+			selectedTargetTerritory= new TerritoryHighlight(this, control.getTargetSelection(), mainLayout);
+		}
+		else if (control.getTargetSelection() == null && selectedTargetTerritory != null)
+		{
+			selectedTargetTerritory.remove();
+			selectedTargetTerritory = null;
+		}
+	}
 
-    	
-    	yourDialog.show();
+	public void tacticalMoveDialog(Territory source, Territory target) {
+    	TacticalMoveDialog dialog = new TacticalMoveDialog(this, control, (ViewGroup)getCurrentFocus(), source, target);
+    	dialog.show();
+	}
+	
+	public void attackDialog(Territory source, Territory target) {
+    	AttackDialog dialog = new AttackDialog(this, control, (ViewGroup)getCurrentFocus(), source, target);
+    	dialog.show();
 	}
     
 

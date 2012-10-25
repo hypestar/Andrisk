@@ -76,7 +76,63 @@ public class Controller implements OnTouchListener{
 	{
 		return game.getActivePlayer();
 	}
+	
+	public void tacticalMove(Territory source, Territory target, int numOfTroops)
+	{
+		source.moveTroops(numOfTroops);
+		target.reinforce(numOfTroops);
+		main.updateArmies();
+		resetTerritorySelections();
+	}
 
+	
+	public void setTargetTerritory(Territory target) {
+		
+		
+		if(target == getSourceSelection())
+		{
+			return;
+		}
+		
+		if(target != getTargetSelection())
+		{
+		game.setTargetTerritory(target);
+		}
+		else
+		{
+			game.setTargetTerritory(null);
+		}
+		main.updateTerritorySelections();
+	}
+	
+	public void setSourceTerritory(Territory source) {
+		
+		if(source != getSourceSelection())
+		{
+			game.setSourceTerritory(source);
+		}
+		else
+		{
+			game.setSourceTerritory(null);
+		}
+		main.updateTerritorySelections();
+	}
+
+
+	public void resetTerritorySelections() {
+		game.setSourceTerritory(null);
+		game.setTargetTerritory(null);
+		main.updateTerritorySelections();
+	}
+
+	public Territory getSourceSelection()
+	{
+		return game.getSourceTerritory();
+	}
+	
+	public Territory getTargetSelection() {
+		return game.getTargetTerritory();
+	}
 
 
 	public boolean onTouch(View v, MotionEvent event) {
@@ -122,42 +178,39 @@ public class Controller implements OnTouchListener{
 				
 			case ATTACK:
 				Log.v("Controller", "ATTACK");
-				if (army.getTerritory().getOwner().equals(getActivePlayer()) && game.getSourceTerritory() == null)
+				if (army.getTerritory().getOwner().equals(getActivePlayer()) && army.getTerritory().getArmySize() > 1)
 				{
-					game.setSourceTerritory(army.getTerritory());
+					setSourceTerritory(army.getTerritory());
+					main.updateTerritorySelections();
 					return true;
 				}
-				else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && game.getSourceTerritory() != null)
+				else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && getSourceSelection() != null)
 				{
-					game.setTargetTerritory(army.getTerritory());
+					setTargetTerritory(army.getTerritory());
 					Log.v("ATTACK", game.getSourceTerritory().getName() + " is attacking " + game.getTargetTerritory().getName());
-					Log.v("ATTACK", "For testing purposes we are now going to tacticalmove phase");
+					main.attackDialog(getSourceSelection(), getTargetSelection());
+					//Log.v("ATTACK", "For testing purposes we are now going to tacticalmove phase");
 					game.setGamePhase(GamePhase.TACTICALMOVE);
-					game.setSourceTerritory(null);
-					game.setTargetTerritory(null);
+					resetTerritorySelections();
+					main.updateTerritorySelections();
+					return true;
 				}
-				break;
-				
+				return false;
+
 				
 			case TACTICALMOVE:
 				Log.v("Controller", "TACTICALMOVE");
 				if (army.getTerritory().getOwner().equals(getActivePlayer()))
 				{
-					if(army.getTerritory() == game.getSourceTerritory())
+					
+					if(getSourceSelection() == null || getSourceSelection() == army.getTerritory())
 					{
-						Log.v("TATICALMOVE", "Source territory " + game.getSourceTerritory().getName() + " has been deselected");
-						game.setSourceTerritory(null);
+						setSourceTerritory(army.getTerritory());
 					}
-					else if(game.getSourceTerritory() == null)
+					else if (getSourceSelection().isNeighbour(army.getTerritory()))
 					{
-						game.setSourceTerritory(army.getTerritory());
-						Log.v("TATICALMOVE", "Source territory has been set to : " + game.getSourceTerritory().getName());
-					}
-					else
-					{
-						game.setTargetTerritory(army.getTerritory());
-						Log.v("TATICALMOVE", "Ready to move troops between " + game.getSourceTerritory().getName() + " and " + game.getTargetTerritory().getName());
-						main.tacticalMoveDialog(game.getSourceTerritory().getName(), game.getSourceTerritory().getArmySize(), game.getTargetTerritory().getName(), game.getTargetTerritory().getArmySize());
+						setTargetTerritory(army.getTerritory());
+						main.tacticalMoveDialog(getSourceSelection(), getTargetSelection());
 					}
 					return true;
 				}

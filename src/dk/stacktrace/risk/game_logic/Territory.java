@@ -2,6 +2,8 @@ package dk.stacktrace.risk.game_logic;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import dk.stacktrace.risk.game_logic.enumerate.TerritoryID;
 
 public class Territory {
@@ -31,10 +33,12 @@ public class Territory {
 
 	public int moveTroops(int armySize)
 	{
-		if (this.armySize -1 <= armySize)
+		Log.v("moveTroops", "Hej");
+		if (this.armySize -1 >= armySize)
 		{
 			this.armySize -= armySize;
-			return armySize;
+			Log.v("Territory move troops ", "Troops left " + this.armySize);
+			return this.armySize;
 		}
 		else
 		{
