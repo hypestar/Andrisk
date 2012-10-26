@@ -10,11 +10,12 @@ public class Dice implements Comparable<Dice>{
 	
 	public Dice(boolean attackDice) {
 		this.attackDice = attackDice;
+		rand = new Random();
 	}
 	
 	public int roll()
 	{
-		return rand.nextInt(5) + 1;
+		return (dice = rand.nextInt(5) + 1);
 	}
 	
 	public int getDice() {

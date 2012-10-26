@@ -11,6 +11,7 @@ import dk.stacktrace.risk.game_logic.Board;
 import dk.stacktrace.risk.game_logic.Player;
 import dk.stacktrace.risk.game_logic.RiskGame;
 import dk.stacktrace.risk.game_logic.Territory;
+import dk.stacktrace.risk.game_logic.battle.Battle;
 import dk.stacktrace.risk.game_logic.enumerate.ArmyColor;
 import dk.stacktrace.risk.game_logic.enumerate.GamePhase;
 import dk.stacktrace.risk.gui.Army;
@@ -133,6 +134,10 @@ public class Controller implements OnTouchListener{
 	public Territory getTargetSelection() {
 		return game.getTargetTerritory();
 	}
+	
+	public Battle getBattle() {
+		return game.getBattle();
+	}
 
 
 	public boolean onTouch(View v, MotionEvent event) {
@@ -188,7 +193,8 @@ public class Controller implements OnTouchListener{
 				{
 					setTargetTerritory(army.getTerritory());
 					Log.v("ATTACK", game.getSourceTerritory().getName() + " is attacking " + game.getTargetTerritory().getName());
-					main.attackDialog(getSourceSelection(), getTargetSelection());
+					game.createBattle(10);
+					main.attackDialog();
 					//Log.v("ATTACK", "For testing purposes we are now going to tacticalmove phase");
 					game.setGamePhase(GamePhase.TACTICALMOVE);
 					resetTerritorySelections();

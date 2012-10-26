@@ -3,6 +3,7 @@ package dk.stacktrace.risk.game_logic;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import dk.stacktrace.risk.game_logic.battle.Battle;
 import dk.stacktrace.risk.game_logic.enumerate.GamePhase;
 
 import android.util.Log;
@@ -13,6 +14,7 @@ public class RiskGame {
 	private Player activePlayer;
 	private GamePhase gamePhase;
 	private Territory sourceTerritory, targetTerritory;
+	private Battle battle;
 	
 	/**
 	 * @param args
@@ -25,6 +27,7 @@ public class RiskGame {
 		gamePhase = GamePhase.INITIAL_REINFORCEMENT;
 		sourceTerritory = null;
 		targetTerritory = null;
+		battle = null;
 	}
 	
 	public void setInitialReinforcementForAllPlayers() {
@@ -152,5 +155,19 @@ public class RiskGame {
 	public Territory getTargetTerritory() {
 		return targetTerritory;
 	}
-
+	
+	public Battle createBattle(int attackingArmy) {
+		if (sourceTerritory != null && targetTerritory != null)
+		{
+			battle = new Battle(sourceTerritory, targetTerritory);
+			return battle;
+		}
+		return null;
+	}
+	
+	public Battle getBattle() {
+		return battle;
+	}
+		
+	
 }

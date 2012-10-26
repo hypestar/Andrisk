@@ -4,86 +4,86 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/attackTerritory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/attackArmy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/attackTerritory"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="38dp"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/defendTerritory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/textView1"
+        android:layout_above="@+id/attackArmy"
         android:layout_alignParentRight="true"
         android:layout_marginRight="50dp"
         android:text="TextView" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/defendArmy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignBaseline="@+id/attackArmy"
+        android:layout_alignBottom="@+id/attackArmy"
         android:layout_alignParentRight="true"
         android:layout_marginRight="50dp"
         android:text="TextView" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/attackDice1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/attackArmy"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         android:src="@drawable/a6" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/attackDice2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/attackDice1"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="23dp"
         android:src="@drawable/a3" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/attackDice3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView2"
+        android:layout_below="@+id/attackDice2"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="26dp"
         android:src="@drawable/a1" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/defendDice2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/imageView2"
+        android:layout_alignTop="@+id/attackDice2"
         android:layout_marginRight="50dp"
         android:src="@drawable/d3" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/defendDice1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/imageView1"
+        android:layout_alignTop="@+id/attackDice1"
         android:layout_marginRight="50dp"
         android:src="@drawable/d4" />
 
@@ -91,9 +91,9 @@
         android:id="@+id/fightBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_alignRight="@+id/imageView3"
-        android:layout_below="@+id/imageView3"
+        android:layout_alignLeft="@+id/attackDice3"
+        android:layout_alignRight="@+id/attackDice3"
+        android:layout_below="@+id/attackDice3"
         android:layout_marginTop="32dp"
         android:text="Fight" />
 
@@ -103,8 +103,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/fightBtn"
         android:layout_alignBottom="@+id/fightBtn"
-        android:layout_alignLeft="@+id/imageView5"
-        android:layout_alignRight="@+id/imageView5"
+        android:layout_alignLeft="@+id/defendDice2"
+        android:layout_alignRight="@+id/defendDice2"
         android:text="Retreat" />
 
 </RelativeLayout>

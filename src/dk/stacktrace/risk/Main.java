@@ -144,8 +144,8 @@ public class Main extends Activity {
     	dialog.show();
 	}
 	
-	public void attackDialog(Territory source, Territory target) {
-    	AttackDialog dialog = new AttackDialog(this, control, (ViewGroup)getCurrentFocus(), source, target);
+	public void attackDialog() {
+    	AttackDialog dialog = new AttackDialog(this, control, (ViewGroup)getCurrentFocus());
     	dialog.show();
 	}
     
