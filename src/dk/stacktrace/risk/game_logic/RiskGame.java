@@ -16,9 +16,7 @@ public class RiskGame {
 	private Territory sourceTerritory, targetTerritory;
 	private Battle battle;
 	
-	/**
-	 * @param args
-	 */
+	
 	
 	public RiskGame(ArrayList<Player> players) {
 		this.players = players;
@@ -170,6 +168,11 @@ public class RiskGame {
 			return battle;
 		}
 		return null;
+	}
+	
+	public void endBattle()
+	{
+		battle = null;
 	}
 	
 	public Battle getBattle() {

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/textTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textSource"
+        android:layout_alignBottom="@+id/textSource"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textSourceTroops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textTarget"
+        android:layout_alignLeft="@+id/textSource"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textTargetTroops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textSourceTroops"
+        android:layout_alignBottom="@+id/textSourceTroops"
+        android:layout_alignLeft="@+id/textTarget"
+        android:text="TextView" />
+
+    <SeekBar
+        android:id="@+id/troopsSeekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textSource"
+        android:layout_marginTop="33dp"
+        android:paddingLeft="50dip"
+        android:paddingRight="50dip" />
+
+    <Button
+        android:id="@+id/buttonMove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/troopsSeekBar1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="63dp"
+        android:text="Move Troops" />
+
+</RelativeLayout>

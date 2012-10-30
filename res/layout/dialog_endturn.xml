@@ -14,21 +14,32 @@
         android:text="TextView" />
 
     <Button
-        android:id="@+id/tacticalMoveBtn"
+        android:id="@+id/endTurnBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/endTurnText"
-        android:layout_marginTop="34dp"
-        android:layout_toLeftOf="@+id/endTurnText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="End Turn" />
+
+    <Button
+        android:id="@+id/tacticalMoveBtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/endTurnBtn1"
+        android:layout_alignBottom="@+id/endTurnBtn1"
+        android:layout_marginRight="22dp"
+        android:layout_toLeftOf="@+id/endTurnBtn1"
         android:text="Tactical Move" />
 
     <Button
-        android:id="@+id/endTurnBtn"
+        android:id="@+id/cancelEndTurnBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tacticalMoveBtn"
-        android:layout_alignBottom="@+id/tacticalMoveBtn"
-        android:layout_toRightOf="@+id/endTurnText"
-        android:text="End Turn" />
+        android:layout_alignBaseline="@+id/endTurnBtn1"
+        android:layout_alignBottom="@+id/endTurnBtn1"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/endTurnBtn1"
+        android:text="Cancel" />
 
 </RelativeLayout>

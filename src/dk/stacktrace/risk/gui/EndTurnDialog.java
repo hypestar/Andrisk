@@ -26,7 +26,7 @@ public class EndTurnDialog extends Dialog implements OnClickListener{
 	LayoutInflater inflater;
 	View layout;
 
-	Button tacticalMoveBtn, endTurnBtn;
+	Button tacticalMoveBtn, endTurnBtn, cancelBtn;
 	TextView questionText;
 	Context context;
 	
@@ -43,30 +43,35 @@ public class EndTurnDialog extends Dialog implements OnClickListener{
 		setContentView(layout);
 		setTitle("End turn ?");	
 		
-		tacticalMoveBtn = (Button) findViewById(R.id.tacticalMoveBtn);
+		tacticalMoveBtn = (Button) findViewById(R.id.tacticalMoveBtn1);
 		tacticalMoveBtn.setOnClickListener(this);
 		
-		endTurnBtn = (Button) findViewById(R.id.endTurnBtn);
+		endTurnBtn = (Button) findViewById(R.id.endTurnBtn1);
 		endTurnBtn.setOnClickListener(this);
+		
+		cancelBtn = (Button) findViewById(R.id.cancelEndTurnBtn1);
+		cancelBtn.setOnClickListener(this);
 		
 		questionText = (TextView) findViewById(R.id.endTurnText);
 		questionText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
-		
-		
-		
+		questionText.setText("What do you command sir ?");
 	}
 
 	
 	public void onClick(View v) {
-		if(((Button) v).getId() == R.id.endTurnBtn)
+		if(((Button) v).getId() == R.id.endTurnBtn1)
 		{
 			dismiss();
 			control.endTurn();
 		}
-		else if (((Button) v).getId() == R.id.tacticalMoveBtn)
+		else if (((Button) v).getId() == R.id.tacticalMoveBtn1)
 		{
 			dismiss();
 			control.gotoTacticalMovePhase();
+		}
+		else if (((Button) v).getId() == R.id.cancelEndTurnBtn1)
+		{
+			dismiss();
 		}
 	}
 }

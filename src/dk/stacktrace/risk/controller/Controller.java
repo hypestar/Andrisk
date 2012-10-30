@@ -210,9 +210,9 @@ public class Controller implements OnTouchListener{
 					game.createBattle();
 					main.attackDialog();
 					
-					//game.setGamePhase(GamePhase.TACTICALMOVE);
-					resetTerritorySelections();
-					main.updateTerritorySelections();
+					
+					//resetTerritorySelections();
+					//main.updateTerritorySelections();
 					return true;
 				}
 				return false;
@@ -247,6 +247,28 @@ public class Controller implements OnTouchListener{
 		return false;
 	}
 
+	public void retreat()
+	{
+		game.endBattle();
+		resetTerritorySelections();
+	}
+	
+	public void postBattle()
+	{
+		Battle battle = getBattle();
+		if (battle.attackerWon())
+		{
+			battle.getDefendingTerritory().setOwner(battle.getWinner());	
+			battle.getDefendingTerritory().reinforce(1);
+			battle.setAttackingArmy(battle.getAttackingArmy() - 1);
+			
+			if(battle.getAttackingArmy() > 0)
+			{
+				main.postBattleTacticalMoveDialog();
+			}
+			main.update();
+		}
+	}
 	
 	public void endTurn()
 	{

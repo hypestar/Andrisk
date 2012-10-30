@@ -24,6 +24,7 @@ import dk.stacktrace.risk.gui.AttackDialog;
 import dk.stacktrace.risk.gui.DoneButton;
 import dk.stacktrace.risk.gui.EndTurnDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
+import dk.stacktrace.risk.gui.PostBattleMoveDialog;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
 
@@ -157,6 +158,10 @@ public class Main extends Activity {
     	dialog.show();
 	}
     
+	public void postBattleTacticalMoveDialog() {
+    	PostBattleMoveDialog dialog = new PostBattleMoveDialog(this, control, (ViewGroup)getCurrentFocus());
+    	dialog.show();
+	}
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -125,6 +125,7 @@ public class AttackDialog extends Dialog implements OnClickListener{
 		if(((Button) v).getId() == R.id.retreatBtn)
 		{
 			dismiss();
+			control.retreat();
 		}
 		else if (((Button) v).getId() == R.id.fightBtn)
 		{
@@ -170,28 +171,17 @@ public class AttackDialog extends Dialog implements OnClickListener{
 		{
 			fightBtn.setOnClickListener(null);
 			retreatBtn.setOnClickListener(null);
-			setTitle(battle.getLoser().getName() + " gets owned by" + battle.getWinner().getName());
-			if (battle.attackerWon())
-			{
-				battle.getDefendingTerritory().setOwner(battle.getWinner());	
-				
-				// TODO The user should be presented with a dialog with a seekbar,
-				// so that he can decide how many troops should be moved to the newly won territory
-				if(battle.getAttackingArmy() > 1)
-				{
-					battle.getDefendingTerritory().reinforce(battle.getAttackingArmy());
-				}
-			}
-			
-			
+			setTitle(battle.getLoser().getName() + " gets owned by " + battle.getWinner().getName());
 			
 			Handler handler = new Handler(); 
 			    handler.postDelayed(new Runnable() { 
 			         public void run() { 
 			              dismiss();
+			              control.postBattle();
 			              ((Main)context).update();
 			         } 
 			    }, 2000);
+			    
 		}
 		
 		

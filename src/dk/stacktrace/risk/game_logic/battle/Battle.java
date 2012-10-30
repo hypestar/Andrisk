@@ -167,6 +167,11 @@ public class Battle
 		return attackingArmy;
 	}
 
+	public void setAttackingArmy(int attackingArmy)
+	{
+		this.attackingArmy = attackingArmy;
+	}
+	
 	public Territory getAttackingTerritory()
 	{
 		return attackingTerritory;

@@ -100,4 +100,6 @@ public class Territory {
 	public void kill() {
 		--armySize;
 	}
+	
+	
 }
