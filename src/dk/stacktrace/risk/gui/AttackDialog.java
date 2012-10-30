@@ -168,14 +168,19 @@ public class AttackDialog extends Dialog implements OnClickListener{
 		updateDices();
 		if (battle.battleIsOver())
 		{
+			fightBtn.setOnClickListener(null);
+			retreatBtn.setOnClickListener(null);
 			setTitle(battle.getLoser().getName() + " gets owned by" + battle.getWinner().getName());
 			if (battle.attackerWon())
 			{
-				battle.getDefendingTerritory().setOwner(battle.getWinner());
+				battle.getDefendingTerritory().setOwner(battle.getWinner());	
 				
 				// TODO The user should be presented with a dialog with a seekbar,
 				// so that he can decide how many troops should be moved to the newly won territory
-				battle.getDefendingTerritory().reinforce(battle.getAttackingArmy()); 
+				if(battle.getAttackingArmy() > 1)
+				{
+					battle.getDefendingTerritory().reinforce(battle.getAttackingArmy());
+				}
 			}
 			
 			

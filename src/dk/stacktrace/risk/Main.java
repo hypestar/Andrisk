@@ -21,6 +21,8 @@ import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 import dk.stacktrace.risk.gui.Army;
 import dk.stacktrace.risk.gui.AttackDialog;
+import dk.stacktrace.risk.gui.DoneButton;
+import dk.stacktrace.risk.gui.EndTurnDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
@@ -33,6 +35,7 @@ public class Main extends Activity {
 	private PlayerInfo playerInfo;
 	private ArrayList<TerritoryHighlight> selectedTerritories;
 	private TerritoryHighlight selectedSourceTerritory, selectedTargetTerritory;
+	private DoneButton doneButton;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class Main extends Activity {
         //Set the risk board image as background 
         mainLayout.setBackgroundResource(R.drawable.board_colored);
 
-
+        doneButton = new DoneButton(this, mainLayout, control);
         createArmies();
         selectedSourceTerritory = null;
         selectedTargetTerritory = null;
@@ -146,6 +149,11 @@ public class Main extends Activity {
 	
 	public void attackDialog() {
     	AttackDialog dialog = new AttackDialog(this, control, (ViewGroup)getCurrentFocus());
+    	dialog.show();
+	}
+	
+	public void endTurnDialog() {
+    	EndTurnDialog dialog = new EndTurnDialog(this, control, (ViewGroup)getCurrentFocus());
     	dialog.show();
 	}
     

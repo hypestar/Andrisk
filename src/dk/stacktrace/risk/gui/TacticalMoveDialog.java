@@ -97,6 +97,7 @@ public class TacticalMoveDialog extends Dialog implements OnSeekBarChangeListene
 		{
 			control.tacticalMove(source, target, numOfTroopsToMove);
 			control.resetTerritorySelections();
+			control.endTurn();
 			dismiss();
 		}
 	}

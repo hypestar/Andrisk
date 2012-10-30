@@ -24,7 +24,7 @@ public class RiskGame {
 		this.players = players;
 		board = new Board();
 		activePlayer = this.players.get(0);
-		gamePhase = GamePhase.INITIAL_REINFORCEMENT;
+		gamePhase = null;
 		sourceTerritory = null;
 		targetTerritory = null;
 		battle = null;
@@ -109,6 +109,8 @@ public class RiskGame {
 		if(gamePhase != GamePhase.INITIAL_REINFORCEMENT)
 		{
 			activePlayer.reinforcement(board.calcReinforcementBonus(activePlayer));
+			gamePhase = GamePhase.REINFORCEMENT;
+			
 		}
 	}
 	
@@ -140,6 +142,11 @@ public class RiskGame {
 		return true;
 	}
 	
+	public boolean reinforcementPhaseIsDone()
+	{
+		return !activePlayer.hasTroopsToDeploy();
+	}
+	
 	public void setSourceTerritory(Territory sourceTerritory) {
 		this.sourceTerritory = sourceTerritory;
 	}
@@ -156,7 +163,7 @@ public class RiskGame {
 		return targetTerritory;
 	}
 	
-	public Battle createBattle(int attackingArmy) {
+	public Battle createBattle() {
 		if (sourceTerritory != null && targetTerritory != null)
 		{
 			battle = new Battle(sourceTerritory, targetTerritory);

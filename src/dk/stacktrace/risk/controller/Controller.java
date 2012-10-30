@@ -15,6 +15,7 @@ import dk.stacktrace.risk.game_logic.battle.Battle;
 import dk.stacktrace.risk.game_logic.enumerate.ArmyColor;
 import dk.stacktrace.risk.game_logic.enumerate.GamePhase;
 import dk.stacktrace.risk.gui.Army;
+import dk.stacktrace.risk.gui.DoneButton;
 
 public class Controller implements OnTouchListener{
 	
@@ -56,9 +57,14 @@ public class Controller implements OnTouchListener{
 		board = game.getBoard();
 		
 		dealTerritories();
-		game.setInitialReinforcementForAllPlayers();
+		gotoIntitialReinforcementPhase();
+		
 	}
 	
+	
+
+
+
 	public void dealTerritories()
 	{
 		game.dealTerritories();
@@ -142,6 +148,15 @@ public class Controller implements OnTouchListener{
 
 	public boolean onTouch(View v, MotionEvent event) {
 		
+		if (v instanceof DoneButton && event.getAction() == MotionEvent.ACTION_DOWN)
+		{
+			if(game.initialReinforcementPhaseIsDone() && game.reinforcementPhaseIsDone())
+			{
+				main.endTurnDialog();
+				main.update();
+			}
+		}
+		
 		if (v instanceof Army && event.getAction() == MotionEvent.ACTION_DOWN)
 		{
 			Army army = (Army) v;
@@ -155,13 +170,14 @@ public class Controller implements OnTouchListener{
 					army.getTerritory().reinforce(getActivePlayer().deploy());
 					if(game.initialReinforcementPhaseIsDone())
 					{
-						game.setGamePhase(GamePhase.REINFORCEMENT);
-						Log.v("ON Touch", "Initial Deployment phase is done");
+						gotoReinforcementPhase();
+						
 					}
 					endTurn();
 					main.update();
 					return true;
-				}	
+				}
+				
 				break;
 				
 				
@@ -170,10 +186,9 @@ public class Controller implements OnTouchListener{
 				if (army.getTerritory().getOwner().equals(getActivePlayer()))
 				{
 					army.getTerritory().reinforce(getActivePlayer().deploy());
-					if(!game.getActivePlayer().hasTroopsToDeploy())
+					if(game.reinforcementPhaseIsDone())
 					{
-						game.setGamePhase(GamePhase.ATTACK);
-						Log.v("ON Touch", "Reinforcement phase is done - advancing to attack phase");
+						gotoAttackPhase();
 					}
 					main.update();
 					return true;
@@ -189,14 +204,13 @@ public class Controller implements OnTouchListener{
 					main.updateTerritorySelections();
 					return true;
 				}
-				else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && getSourceSelection() != null)
+				else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && getSourceSelection() != null && army.getTerritory().isNeighbour(getSourceSelection()))
 				{
 					setTargetTerritory(army.getTerritory());
-					Log.v("ATTACK", game.getSourceTerritory().getName() + " is attacking " + game.getTargetTerritory().getName());
-					game.createBattle(10);
+					game.createBattle();
 					main.attackDialog();
-					//Log.v("ATTACK", "For testing purposes we are now going to tacticalmove phase");
-					game.setGamePhase(GamePhase.TACTICALMOVE);
+					
+					//game.setGamePhase(GamePhase.TACTICALMOVE);
 					resetTerritorySelections();
 					main.updateTerritorySelections();
 					return true;
@@ -232,10 +246,38 @@ public class Controller implements OnTouchListener{
 		
 		return false;
 	}
+
 	
 	public void endTurn()
 	{
+		resetTerritorySelections();
 		game.endTurn();
+		main.update();	
 	}
 	
+	private void gotoIntitialReinforcementPhase()
+	{
+		game.setInitialReinforcementForAllPlayers();
+		game.setGamePhase(GamePhase.INITIAL_REINFORCEMENT);
+	}
+	
+	public void gotoTacticalMovePhase()
+	{
+		if(game.reinforcementPhaseIsDone())
+		{
+			resetTerritorySelections();
+			game.setGamePhase(GamePhase.TACTICALMOVE);
+		}
+	}
+	
+	private void gotoReinforcementPhase()
+	{	
+		resetTerritorySelections();
+		game.setGamePhase(GamePhase.REINFORCEMENT);
+	}
+
+	private void gotoAttackPhase()
+	{
+		game.setGamePhase(GamePhase.ATTACK);
+	}
 }
