@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import dk.stacktrace.risk.GameSound;
 import dk.stacktrace.risk.Main;
 import dk.stacktrace.risk.game_logic.Board;
 import dk.stacktrace.risk.game_logic.Player;
@@ -103,6 +104,7 @@ public class Controller implements OnTouchListener{
 		
 		if(target != getTargetSelection())
 		{
+		GameSound.playSound(main, GameSound.SELECT_TERRITORY);	
 		game.setTargetTerritory(target);
 		}
 		else
@@ -122,6 +124,7 @@ public class Controller implements OnTouchListener{
 		{
 			game.setSourceTerritory(null);
 		}
+		GameSound.playSound(main, GameSound.SELECT_TERRITORY);
 		main.updateTerritorySelections();
 	}
 
@@ -167,6 +170,7 @@ public class Controller implements OnTouchListener{
 				Log.v("Controller", "INITIAL_REINFORCEMENT");
 				if (army.getTerritory().getOwner().equals(getActivePlayer()))
 				{
+					GameSound.playSound(main, GameSound.DEPLOY_CLICK);
 					army.getTerritory().reinforce(getActivePlayer().deploy());
 					if(game.initialReinforcementPhaseIsDone())
 					{
@@ -185,6 +189,7 @@ public class Controller implements OnTouchListener{
 				Log.v("Controller", "REINFORCEMENT");
 				if (army.getTerritory().getOwner().equals(getActivePlayer()))
 				{
+					GameSound.playSound(main, GameSound.DEPLOY_CLICK);
 					army.getTerritory().reinforce(getActivePlayer().deploy());
 					if(game.reinforcementPhaseIsDone())
 					{
@@ -262,6 +267,7 @@ public class Controller implements OnTouchListener{
 		
 		if (battle.attackerWon())
 		{
+			GameSound.playSound(main, GameSound.VICTORY);
 			battle.getDefendingTerritory().setOwner(winner);	
 			battle.getDefendingTerritory().reinforce(1);
 			battle.setAttackingArmy(battle.getAttackingArmy() - 1);
@@ -291,14 +297,16 @@ public class Controller implements OnTouchListener{
 		resetTerritorySelections();
 		game.endTurn();
 		main.update();
-		if(game.isOnlyOneAlive(getActivePlayer()))
+		
+		if(game.getGamePhase() != GamePhase.INITIAL_REINFORCEMENT)
 		{
-			
+			GameSound.playSound(main, GameSound.REINFORCEMENT_PHASE);	
 		}
 	}
 	
 	private void gotoIntitialReinforcementPhase()
 	{
+		
 		game.setInitialReinforcementForAllPlayers();
 		game.setGamePhase(GamePhase.INITIAL_REINFORCEMENT);
 	}
@@ -307,6 +315,7 @@ public class Controller implements OnTouchListener{
 	{
 		if(game.reinforcementPhaseIsDone())
 		{
+			GameSound.playSound(main, GameSound.TACTICAL_MOVE_PHASE);
 			resetTerritorySelections();
 			game.setGamePhase(GamePhase.TACTICALMOVE);
 		}
@@ -314,12 +323,14 @@ public class Controller implements OnTouchListener{
 	
 	private void gotoReinforcementPhase()
 	{	
+		GameSound.playSound(main, GameSound.REINFORCEMENT_PHASE);
 		resetTerritorySelections();
 		game.setGamePhase(GamePhase.REINFORCEMENT);
 	}
 
 	private void gotoAttackPhase()
 	{
+		GameSound.playSound(main, GameSound.ATTACK_PHASE);
 		game.setGamePhase(GamePhase.ATTACK);
 	}
 	

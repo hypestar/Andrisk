@@ -42,6 +42,9 @@ public class Main extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        GameSound.initSounds(this); // preload game sounds 
+        
         control = new Controller(this);
         control.createTestGame();
         control.dealTerritories();
