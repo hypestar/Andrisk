@@ -38,6 +38,7 @@ public class PostBattleMoveDialog extends Dialog implements OnSeekBarChangeListe
 		this.source = control.getBattle().getAttackingTerritory();
 		this.target = control.getBattle().getDefendingTerritory();
 		
+		setCancelable(false);
 		
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layout = inflater.inflate(R.layout.dialog_postbattletacticalmove, rootElement);

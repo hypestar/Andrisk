@@ -35,6 +35,8 @@ public class TacticalMoveDialog extends Dialog implements OnSeekBarChangeListene
 		this.target = target;
 		this.control = control;
 		
+		setCanceledOnTouchOutside(false);
+		
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layout = inflater.inflate(R.layout.dialog_tacticalmove, rootElement);
 		setContentView(layout);

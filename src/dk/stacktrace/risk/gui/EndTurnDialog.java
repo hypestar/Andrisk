@@ -38,6 +38,8 @@ public class EndTurnDialog extends Dialog implements OnClickListener{
 		this.context = context;
 		this.control = control;
 		
+		setCanceledOnTouchOutside(false);
+		
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layout = inflater.inflate(R.layout.dialog_endturn, rootElement);
 		setContentView(layout);

@@ -44,6 +44,8 @@ public class AttackDialog extends Dialog implements OnClickListener{
 		this.source = battle.getAttackingTerritory();
 		this.target = battle.getDefendingTerritory();
 		
+		setCanceledOnTouchOutside(false);
+		
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layout = inflater.inflate(R.layout.dialog_attack, rootElement);
 		setContentView(layout);
