@@ -15,7 +15,7 @@ public class RiskGame {
 	private GamePhase gamePhase;
 	private Territory sourceTerritory, targetTerritory;
 	private Battle battle;
-	private Player winner;
+	private Player gameWinner;
 	
 	
 	
@@ -27,7 +27,7 @@ public class RiskGame {
 		sourceTerritory = null;
 		targetTerritory = null;
 		battle = null;
-		winner = null;
+		gameWinner = null;
 	}
 	
 	public void setInitialReinforcementForAllPlayers() {
@@ -116,7 +116,6 @@ public class RiskGame {
 	
 	public void endTurn()
 	{
-		//activePlayer = nextPlayer();
 		activePlayer = getNextAlivePlayer();
 		if(gamePhase != GamePhase.INITIAL_REINFORCEMENT)
 		{
@@ -184,10 +183,7 @@ public class RiskGame {
 		return null;
 	}
 	
-	public void endBattle()
-	{
-		battle = null;
-	}
+	
 	
 	public Battle getBattle() {
 		return battle;
@@ -215,8 +211,13 @@ public class RiskGame {
 		return true;
 	}
 	
-	public Player getWinner()
+	public Player getGameWinner()
 	{
-		return winner;
+		return gameWinner;
+	}
+	
+	public void setGameWinner(Player gameWinner)
+	{
+		this.gameWinner = gameWinner;
 	}
 }

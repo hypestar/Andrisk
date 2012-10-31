@@ -11,13 +11,14 @@ public class Battle
 	private int attackingArmy;
 	private Territory attackingTerritory, defendingTerritory;
 	private ArrayList<Dice> winnerDices, attackDices, defendDices;
+	private Player winner;
 
 	public Battle(Territory attackingTerritory, Territory defendingTerritory)
 	{
-
 		this.attackingTerritory = attackingTerritory;
 		this.defendingTerritory = defendingTerritory;
-
+		winner = null;
+		
 		attackingArmy = attackingTerritory.getArmySize() - 1;
 		attackingTerritory.moveTroops(attackingArmy);
 	}
@@ -84,15 +85,14 @@ public class Battle
 	
 	public Player getWinner()
 	{
-		if (battleIsOver())
+		if (battleIsOver() && winner == null)
 		{
-			return (attackingArmy > 0) ? attackingTerritory.getOwner() : defendingTerritory.getOwner();
+			winner = (attackingArmy > 0) ? attackingTerritory.getOwner() : defendingTerritory.getOwner();
 		}
-		else 
-		{
-			return null;
-		}
+		return winner;
 	}
+	
+	
 	
 	public boolean attackerWon()
 	{

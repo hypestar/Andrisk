@@ -251,7 +251,6 @@ public class Controller implements OnTouchListener{
 	{
 		Battle battle = game.getBattle();
 		battle.getAttackingTerritory().reinforce(battle.getAttackingArmy());
-		game.endBattle();
 		resetTerritorySelections();
 		main.update();
 	}
@@ -259,17 +258,20 @@ public class Controller implements OnTouchListener{
 	public void postBattle()
 	{
 		Battle battle = getBattle();
+		Player winner = battle.getWinner();
+		
 		if (battle.attackerWon())
 		{
-			battle.getDefendingTerritory().setOwner(battle.getWinner());	
+			battle.getDefendingTerritory().setOwner(winner);	
 			battle.getDefendingTerritory().reinforce(1);
 			battle.setAttackingArmy(battle.getAttackingArmy() - 1);
 
-			if(game.isOnlyOneAlive(getActivePlayer()))
+			if(game.isOnlyOneAlive(winner))
 			{
+				game.setGameWinner(winner);
 				resetTerritorySelections();
-				Log.v("Controller.postBattle", "The winner is " + getActivePlayer().getName());
-				// Show Victory dialogbox
+				Log.v("Controller.postBattle", "The winner of the game is " + winner.getName());
+				
 				main.winnerDialog();
 				return;
 			}
@@ -279,6 +281,7 @@ public class Controller implements OnTouchListener{
 				main.postBattleTacticalMoveDialog();
 			}
 		}
+		
 		resetTerritorySelections();	
 		main.update();
 	}
@@ -320,8 +323,8 @@ public class Controller implements OnTouchListener{
 		game.setGamePhase(GamePhase.ATTACK);
 	}
 	
-	public Player getWinner()
+	public Player getGameWinner()
 	{
-		return game.getWinner();
+		return game.getGameWinner();
 	}
 }

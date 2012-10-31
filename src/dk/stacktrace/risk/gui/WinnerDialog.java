@@ -41,7 +41,7 @@ public class WinnerDialog extends Dialog implements OnClickListener{
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		layout = inflater.inflate(R.layout.dialog_winner, rootElement);
 		setContentView(layout);
-		setTitle("End turn ?");	
+		setTitle("World Domination");	
 		
 		rematchBtn = (Button) findViewById(R.id.rematchBtn);
 		rematchBtn.setOnClickListener(this);
@@ -54,7 +54,7 @@ public class WinnerDialog extends Dialog implements OnClickListener{
 		
 		winnerText = (TextView) findViewById(R.id.winnerText);
 		winnerText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
-		winnerText.setText("The Winner Is " + control.getWinner().getName());
+		winnerText.setText("The Winner Is " + control.getGameWinner().getName());
 	}
 
 	
