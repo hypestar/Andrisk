@@ -40,17 +40,17 @@ public class Battle
 		for (Dice dice : attackDices)
 		{
 			dice.roll();
-			Collections.sort(attackDices,Collections.reverseOrder());
 		}
+		Collections.sort(attackDices,Collections.reverseOrder());
 
 		for (Dice dice : defendDices)
 		{
 			dice.roll();
-			Collections.sort(defendDices,Collections.reverseOrder());
 		}
+		Collections.sort(defendDices,Collections.reverseOrder());
 
 		winnerDices = new ArrayList<Dice>();
-		for (int i = 0; i < defendDices.size(); i++)
+		for (int i = 0; i < getNumOfDicesToComapre(); i++)
 		{
 			if (defendDices.get(i).compareTo(attackDices.get(i)) > 0)
 			{
@@ -196,4 +196,20 @@ public class Battle
 		return winnerDices;
 	}
 
+	private int getNumOfDicesToComapre()
+	{
+		if (getNumOfAttackDices() < getNumOfDefendDices())
+		{
+			return getNumOfAttackDices();
+		}
+		else if (getNumOfAttackDices() == getNumOfDefendDices()) 
+		{
+			return getNumOfAttackDices();
+		}
+		else if (getNumOfAttackDices() > getNumOfDefendDices()) 
+		{
+			return getNumOfDefendDices();
+		}
+		return 0;
+	}
 }

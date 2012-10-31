@@ -249,8 +249,11 @@ public class Controller implements OnTouchListener{
 
 	public void retreat()
 	{
+		Battle battle = game.getBattle();
+		battle.getAttackingTerritory().reinforce(battle.getAttackingArmy());
 		game.endBattle();
 		resetTerritorySelections();
+		main.update();
 	}
 	
 	public void postBattle()

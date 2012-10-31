@@ -46,6 +46,7 @@ public class SouthAmerica extends Continent {
 		brazil.addNeighbour(peru);
 		brazil.addNeighbour(argentina);
 		brazil.addNeighbour(peru);
+		brazil.addNeighbour(board.getAfrica().getNorthAfrica());
 		
 		peru.addNeighbour(venezuela);
 		peru.addNeighbour(brazil);

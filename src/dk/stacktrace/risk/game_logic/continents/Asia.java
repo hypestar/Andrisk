@@ -77,6 +77,7 @@ public class Asia extends Continent {
 		kamchatka.addNeighbour(board.getNorthAmerica().getAlaska());
 		kamchatka.addNeighbour(mongolia);
 		kamchatka.addNeighbour(irkutsk);
+		kamchatka.addNeighbour(japan);
 		
 		ural.addNeighbour(board.getEurope().getUkraine());
 		ural.addNeighbour(siberia);
