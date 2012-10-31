@@ -48,7 +48,7 @@ public class Controller implements OnTouchListener{
 
 		players.add(p1);
 		players.add(p2);
-		//players.add(p3);
+		players.add(p3);
 		//players.add(p4);
 		//players.add(p5);
 		//players.add(p6);
@@ -266,8 +266,9 @@ public class Controller implements OnTouchListener{
 			{
 				main.postBattleTacticalMoveDialog();
 			}
-			main.update();
 		}
+		resetTerritorySelections();	
+		main.update();
 	}
 	
 	public void endTurn()

@@ -7,13 +7,11 @@ import dk.stacktrace.risk.game_logic.enumerate.ArmyColor;
 
 public class Player {
 	private String name;
-	private ArrayList<Territory> territories;
+	//private ArrayList<Territory> territories;
 	private ArmyColor armyColor;
 	private int reinforcement;
 
-	public Player() {
-		this("New Player", ArmyColor.BLUE);
-	}
+	
 	
 	public Player(String name, ArmyColor armyColor) {
 		this.name = name;
@@ -25,11 +23,6 @@ public class Player {
 		return armyColor;
 	}
 	
-	public int getTerritoriesOwned()
-	{
-		return territories.size();
-	}
-
 	
 	@Override
 	public boolean equals(Object o) {

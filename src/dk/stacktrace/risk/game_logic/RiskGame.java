@@ -34,9 +34,11 @@ public class RiskGame {
 		switch (players.size()) {
 		case 2:
 			initialReinforcement = 2;
+			//initialReinforcement = 40;
 			break;
 		case 3:
-			initialReinforcement = 35;
+			initialReinforcement = 2;
+			//initialReinforcement = 35;
 			break;
 		case 4:
 			initialReinforcement = 30;
@@ -98,12 +100,23 @@ public class RiskGame {
 			}
 		}
 		// Error
-		return new Player();
+		return null;
+	}
+
+	public Player getNextAlivePlayer()
+	{
+		Player player;
+		do
+		{
+			player = nextPlayer();
+		}while(isDead(player));
+		return player;
 	}
 	
 	public void endTurn()
 	{
-		activePlayer = nextPlayer();
+		//activePlayer = nextPlayer();
+		activePlayer = getNextAlivePlayer();
 		if(gamePhase != GamePhase.INITIAL_REINFORCEMENT)
 		{
 			activePlayer.reinforcement(board.calcReinforcementBonus(activePlayer));
@@ -178,6 +191,15 @@ public class RiskGame {
 	public Battle getBattle() {
 		return battle;
 	}
-		
+	
+	public boolean isAlive(Player player)
+	{
+		return board.getNumberOfTerritoriesOwnedBy(player) > 0;
+	}
+	
+	public boolean isDead(Player player)
+	{
+		return board.getNumberOfTerritoriesOwnedBy(player) <= 0;
+	}
 	
 }
