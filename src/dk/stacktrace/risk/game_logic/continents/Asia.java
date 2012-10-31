@@ -113,6 +113,7 @@ public class Asia extends Continent {
 		china.addNeighbour(india);
 		
 		middleEast.addNeighbour(board.getAfrica().getEgypt());
+		middleEast.addNeighbour(board.getAfrica().getEastAfrica());
 		middleEast.addNeighbour(board.getEurope().getSouthEurope());
 		middleEast.addNeighbour(board.getEurope().getUkraine());
 		middleEast.addNeighbour(afghanistan);
