@@ -94,6 +94,7 @@ public class Asia extends Continent {
 		mongolia.addNeighbour(kamchatka);
 		mongolia.addNeighbour(japan);
 		mongolia.addNeighbour(china);
+		mongolia.addNeighbour(irkutsk);
 		
 		japan.addNeighbour(kamchatka);
 		japan.addNeighbour(mongolia);

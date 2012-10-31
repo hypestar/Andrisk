@@ -69,6 +69,9 @@ public class Africa extends Continent {
 		congo.addNeighbour(southAfrica);
 		
 		southAfrica.addNeighbour(congo);
+		southAfrica.addNeighbour(eastAfrica);
+		southAfrica.addNeighbour(madagascar);
+		
 		congo.addNeighbour(eastAfrica);
 		congo.addNeighbour(madagascar);
 		

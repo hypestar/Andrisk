@@ -105,12 +105,11 @@ public class RiskGame {
 
 	public Player getNextAlivePlayer()
 	{
-		Player player;
 		do
 		{
-			player = nextPlayer();
-		}while(isDead(player));
-		return player;
+			activePlayer = nextPlayer();
+		}while(isDead(activePlayer));
+		return activePlayer;
 	}
 	
 	public void endTurn()
