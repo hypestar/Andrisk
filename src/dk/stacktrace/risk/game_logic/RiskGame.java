@@ -15,6 +15,7 @@ public class RiskGame {
 	private GamePhase gamePhase;
 	private Territory sourceTerritory, targetTerritory;
 	private Battle battle;
+	private Player winner;
 	
 	
 	
@@ -26,6 +27,7 @@ public class RiskGame {
 		sourceTerritory = null;
 		targetTerritory = null;
 		battle = null;
+		winner = null;
 	}
 	
 	public void setInitialReinforcementForAllPlayers() {
@@ -213,4 +215,8 @@ public class RiskGame {
 		return true;
 	}
 	
+	public Player getWinner()
+	{
+		return winner;
+	}
 }

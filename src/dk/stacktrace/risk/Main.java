@@ -27,6 +27,7 @@ import dk.stacktrace.risk.gui.PlayerInfo;
 import dk.stacktrace.risk.gui.PostBattleMoveDialog;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
+import dk.stacktrace.risk.gui.WinnerDialog;
 
 public class Main extends Activity {
 
@@ -163,6 +164,11 @@ public class Main extends Activity {
     	dialog.show();
 	}
 
+	public void winnerDialog() {
+    	WinnerDialog dialog = new WinnerDialog(this, control, (ViewGroup)getCurrentFocus());
+    	dialog.show();
+	}
+	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);

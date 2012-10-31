@@ -3,6 +3,7 @@ package dk.stacktrace.risk.gui;
 import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 import android.content.Context;
+import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -44,6 +45,7 @@ public class PlayerInfo extends RelativeLayout {
 		// Player name
 		playerName = new TextView(context);
 		playerName.setId(2);
+		playerName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
 		RelativeLayout.LayoutParams playerName_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		playerName_lp.addRule(RelativeLayout.RIGHT_OF, playerImage.getId());
 		playerName_lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);

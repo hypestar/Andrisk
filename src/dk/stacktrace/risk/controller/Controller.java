@@ -267,8 +267,10 @@ public class Controller implements OnTouchListener{
 
 			if(game.isOnlyOneAlive(getActivePlayer()))
 			{
+				resetTerritorySelections();
 				Log.v("Controller.postBattle", "The winner is " + getActivePlayer().getName());
 				// Show Victory dialogbox
+				main.winnerDialog();
 				return;
 			}
 			
@@ -316,5 +318,10 @@ public class Controller implements OnTouchListener{
 	private void gotoAttackPhase()
 	{
 		game.setGamePhase(GamePhase.ATTACK);
+	}
+	
+	public Player getWinner()
+	{
+		return game.getWinner();
 	}
 }
