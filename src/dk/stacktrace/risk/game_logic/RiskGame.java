@@ -201,4 +201,16 @@ public class RiskGame {
 		return board.getNumberOfTerritoriesOwnedBy(player) <= 0;
 	}
 	
+	public boolean isOnlyOneAlive(Player player)
+	{
+		for(Player p : players)
+		{
+			if (!p.equals(player) && isAlive(p))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }

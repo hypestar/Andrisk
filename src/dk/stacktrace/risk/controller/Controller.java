@@ -264,6 +264,13 @@ public class Controller implements OnTouchListener{
 			battle.getDefendingTerritory().setOwner(battle.getWinner());	
 			battle.getDefendingTerritory().reinforce(1);
 			battle.setAttackingArmy(battle.getAttackingArmy() - 1);
+
+			if(game.isOnlyOneAlive(getActivePlayer()))
+			{
+				Log.v("Controller.postBattle", "The winner is " + getActivePlayer().getName());
+				// Show Victory dialogbox
+				return;
+			}
 			
 			if(battle.getAttackingArmy() > 0)
 			{
@@ -278,7 +285,11 @@ public class Controller implements OnTouchListener{
 	{
 		resetTerritorySelections();
 		game.endTurn();
-		main.update();	
+		main.update();
+		if(game.isOnlyOneAlive(getActivePlayer()))
+		{
+			
+		}
 	}
 	
 	private void gotoIntitialReinforcementPhase()

@@ -45,9 +45,11 @@ public class Australia extends Continent {
 		
 		newGuinea.addNeighbour(indonesia);
 		newGuinea.addNeighbour(eastAustralia);
+		newGuinea.addNeighbour(westAustralia);
 
 		westAustralia.addNeighbour(indonesia);
 		westAustralia.addNeighbour(eastAustralia);
+		westAustralia.addNeighbour(newGuinea);
 		
 		eastAustralia.addNeighbour(westAustralia);
 		eastAustralia.addNeighbour(indonesia);
