@@ -99,6 +99,20 @@ public class Board {
 		return getTerritoriesOwnedBy(player).size();
 	}
 	
+	public int getNumberOfContinentsOwnedBy(Player player)
+	{
+		int numOfContinents = 0;
+		
+		numOfContinents += asia.ownedBy(player) ? 1 : 0;
+		numOfContinents += europe.ownedBy(player) ? 1 : 0;
+		numOfContinents += northAmerica.ownedBy(player) ? 1 : 0;
+		numOfContinents += southAmerica.ownedBy(player) ? 1 : 0;
+		numOfContinents += australia.ownedBy(player) ? 1 : 0;
+		numOfContinents += africa.ownedBy(player) ? 1 : 0;
+		
+		return numOfContinents;
+	}
+	
 	public ArrayList<Territory> getAllTerritories()
 	{
 		ArrayList<Territory> allTerritories = new ArrayList<Territory>();
@@ -148,4 +162,6 @@ public class Board {
 	public Africa getAfrica() {
 		return africa;
 	}
+	
+	
 }
