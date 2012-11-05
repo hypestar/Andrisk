@@ -8,29 +8,30 @@
         android:id="@+id/winnerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
+        android:layout_marginRight="582dp"
+        android:layout_marginTop="40dp"
         android:text="TextView" />
-
-    <Button
-        android:id="@+id/newGameBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/winnerText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:text="New Game" />
 
     <Button
         android:id="@+id/rematchBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/newGameBtn"
-        android:layout_alignBottom="@+id/newGameBtn"
-        android:layout_marginRight="22dp"
-        android:layout_toLeftOf="@+id/newGameBtn"
-        android:text="Rematch" />
+        android:layout_below="@+id/winnerText"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="38dp"
+        android:layout_toLeftOf="@+id/winnerText"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/newGameBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/rematchBtn"
+        android:layout_alignBottom="@+id/rematchBtn"
+        android:layout_toRightOf="@+id/rematchBtn"
+        android:text="Button" />
 
     <Button
         android:id="@+id/quitBtn"
@@ -38,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/newGameBtn"
         android:layout_alignBottom="@+id/newGameBtn"
-        android:layout_marginLeft="22dp"
+        android:layout_marginLeft="33dp"
         android:layout_toRightOf="@+id/newGameBtn"
-        android:text="Quit" />
+        android:text="Button" />
 
 </RelativeLayout>

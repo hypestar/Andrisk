@@ -3,6 +3,7 @@ package dk.stacktrace.risk.game_logic;
 import java.util.ArrayList;
 
 import dk.stacktrace.risk.game_logic.enumerate.ArmyColor;
+import dk.stacktrace.risk.game_logic.mission.Mission;
 
 
 public class Player {
@@ -10,6 +11,7 @@ public class Player {
 	//private ArrayList<Territory> territories;
 	private ArmyColor armyColor;
 	private int reinforcement;
+	private Mission mission;
 
 	
 	
@@ -64,6 +66,16 @@ public class Player {
 
 	public String getName() {
 		return name;
+	}
+	
+	public void setMission(Mission mission)
+	{
+		this.mission = mission;
+	}
+	
+	public Mission getMission()
+	{
+		return mission;
 	}
 }
 

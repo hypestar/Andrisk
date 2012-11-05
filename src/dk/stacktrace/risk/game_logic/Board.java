@@ -3,12 +3,18 @@ package dk.stacktrace.risk.game_logic;
 import java.util.ArrayList;
 
 import android.util.Log;
+
 import dk.stacktrace.risk.game_logic.continents.Africa;
 import dk.stacktrace.risk.game_logic.continents.Asia;
 import dk.stacktrace.risk.game_logic.continents.Australia;
 import dk.stacktrace.risk.game_logic.continents.Europe;
 import dk.stacktrace.risk.game_logic.continents.NorthAmerica;
 import dk.stacktrace.risk.game_logic.continents.SouthAmerica;
+import dk.stacktrace.risk.game_logic.mission.ContinentMission;
+import dk.stacktrace.risk.game_logic.mission.EighteenTerritoriesMission;
+import dk.stacktrace.risk.game_logic.mission.KillPlayerMission;
+import dk.stacktrace.risk.game_logic.mission.Mission;
+import dk.stacktrace.risk.game_logic.mission.TwentyFourTerritoriesMission;
 
 
 public class Board {
@@ -18,8 +24,12 @@ public class Board {
 	private SouthAmerica southAmerica;
 	private Australia australia;
 	private Africa africa;
+	private RiskGame game;
 	
-	public Board() {
+	private ArrayList<Mission> missions;
+	
+	
+	public Board(RiskGame game) {
  		asia = new Asia(this);
  		europe = new Europe(this);
  		northAmerica = new NorthAmerica(this);
@@ -33,10 +43,33 @@ public class Board {
  		southAmerica.setNeighbours();
  		australia.setNeighbours();
  		africa.setNeighbours();
+
+ 		this.game = game;
  		
-  		
+  		createMissions();
 	}
 	
+
+	private void createMissions()
+	{
+		missions = new ArrayList<Mission>();
+		missions.add(new ContinentMission(europe, australia, true, this));
+		missions.add(new ContinentMission(europe, southAmerica, true, this));
+		missions.add(new ContinentMission(northAmerica, africa, false, this));
+		missions.add(new ContinentMission(northAmerica, australia, false, this));
+		missions.add(new ContinentMission(asia, southAmerica, false, this));
+		missions.add(new ContinentMission(asia, africa, false, this));
+		
+		/*for (int i = 0; i < game.getPlayers().size();i++)
+		{
+			missions.add(new KillPlayerMission(game));
+		}*/
+
+		missions.add(new TwentyFourTerritoriesMission(this));
+		missions.add(new EighteenTerritoriesMission(this));
+		Log.v("Create Missions done", "missions : " +  missions);
+	}
+
 
 	public int calcReinforcementBonus(Player player)
 	{
@@ -163,5 +196,9 @@ public class Board {
 		return africa;
 	}
 	
+	public ArrayList<Mission> getMissions()
+	{
+		return missions;
+	}
 	
 }

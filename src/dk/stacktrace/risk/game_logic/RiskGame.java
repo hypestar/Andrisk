@@ -5,6 +5,8 @@ import java.util.Collections;
 
 import dk.stacktrace.risk.game_logic.battle.Battle;
 import dk.stacktrace.risk.game_logic.enumerate.GamePhase;
+import dk.stacktrace.risk.game_logic.mission.ContinentMission;
+import dk.stacktrace.risk.game_logic.mission.Mission;
 
 import android.util.Log;
 
@@ -16,19 +18,23 @@ public class RiskGame {
 	private Territory sourceTerritory, targetTerritory;
 	private Battle battle;
 	private Player gameWinner;
+
 	
 	
 	
 	public RiskGame(ArrayList<Player> players) {
 		this.players = players;
-		board = new Board();
+		board = new Board(this);
 		activePlayer = this.players.get(0);
 		gamePhase = null;
 		sourceTerritory = null;
 		targetTerritory = null;
 		battle = null;
 		gameWinner = null;
+		
+		
 	}
+	
 	
 	public void setInitialReinforcementForAllPlayers() {
 		int initialReinforcement = 0;
@@ -66,6 +72,19 @@ public class RiskGame {
 		for (Territory territory : allTerritories) {
 			territory.setOwner(activePlayer);
 			activePlayer = nextPlayer();
+		}
+	}
+	
+	public void dealMissions()
+	{
+		Log.v("dealMissions", "start");
+		ArrayList<Mission> missions= board.getMissions();
+		Collections.shuffle(missions);
+		for (Player player : players) {
+			Mission mission = missions.remove(0);
+			player.setMission(mission);
+			mission.setMissionOwner(player);
+			Log.v("dealMIssions", "Player " + player + " got mission " + mission);
 		}
 	}
 	
@@ -218,6 +237,25 @@ public class RiskGame {
 	
 	public void setGameWinner(Player gameWinner)
 	{
+		if(this.gameWinner == null)
 		this.gameWinner = gameWinner;
+	}
+	
+	public boolean weHaveAWinner()
+	{
+		if(activePlayer.getMission().missionAccomplished())
+		{
+			setGameWinner(activePlayer);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public ArrayList<Player> getPlayers()
+	{
+		return players;
 	}
 }

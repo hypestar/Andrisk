@@ -17,6 +17,7 @@ import dk.stacktrace.risk.game_logic.enumerate.ArmyColor;
 import dk.stacktrace.risk.game_logic.enumerate.GamePhase;
 import dk.stacktrace.risk.gui.Army;
 import dk.stacktrace.risk.gui.DoneButton;
+import dk.stacktrace.risk.gui.MissionCardButton;
 
 public class Controller implements OnTouchListener{
 	
@@ -57,12 +58,14 @@ public class Controller implements OnTouchListener{
 		game = new RiskGame(players);
 		board = game.getBoard();
 		
+		
+		
 		dealTerritories();
+		game.dealMissions();
 		gotoIntitialReinforcementPhase();
 		
 	}
-	
-	
+
 
 
 
@@ -159,6 +162,12 @@ public class Controller implements OnTouchListener{
 				main.update();
 			}
 		}
+		
+		if (v instanceof MissionCardButton && event.getAction() == MotionEvent.ACTION_DOWN)
+		{
+			main.missionCardDialog(getActivePlayer().getMission());
+		}
+		
 		
 		if (v instanceof Army && event.getAction() == MotionEvent.ACTION_DOWN)
 		{
@@ -302,13 +311,22 @@ public class Controller implements OnTouchListener{
 		{
 			GameSound.playSound(main, GameSound.REINFORCEMENT_PHASE);	
 		}
+
+		if(game.weHaveAWinner())
+		{
+			Log.v("Winner by mission", "Winner is " + getActivePlayer().getName());
+			Log.v(getActivePlayer().getName() + "'s mission", "" + getActivePlayer().getMission().getMissionDescription());
+			main.winnerDialog();
+		}
+		
+		Log.v("MISSION CARD", getActivePlayer().getName() + "'s mission : " + getActivePlayer().getMission().getMissionDescription());
 	}
 	
 	private void gotoIntitialReinforcementPhase()
 	{
-		
 		game.setInitialReinforcementForAllPlayers();
 		game.setGamePhase(GamePhase.INITIAL_REINFORCEMENT);
+		
 	}
 	
 	public void gotoTacticalMovePhase()
@@ -337,5 +355,10 @@ public class Controller implements OnTouchListener{
 	public Player getGameWinner()
 	{
 		return game.getGameWinner();
+	}
+	
+	public int getNumberOfTerritoriesOwnedBy(Player player)
+	{
+		return board.getNumberOfTerritoriesOwnedBy(player);
 	}
 }

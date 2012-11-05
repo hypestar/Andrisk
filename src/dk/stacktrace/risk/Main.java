@@ -19,10 +19,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
+import dk.stacktrace.risk.game_logic.mission.Mission;
 import dk.stacktrace.risk.gui.Army;
 import dk.stacktrace.risk.gui.AttackDialog;
 import dk.stacktrace.risk.gui.DoneButton;
 import dk.stacktrace.risk.gui.EndTurnDialog;
+import dk.stacktrace.risk.gui.MissionCardButton;
+import dk.stacktrace.risk.gui.MissionCardDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
 import dk.stacktrace.risk.gui.PostBattleMoveDialog;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
@@ -38,6 +41,7 @@ public class Main extends Activity {
 	private ArrayList<TerritoryHighlight> selectedTerritories;
 	private TerritoryHighlight selectedSourceTerritory, selectedTargetTerritory;
 	private DoneButton doneButton;
+	private MissionCardButton missionCardButton;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,8 @@ public class Main extends Activity {
         mainLayout.setBackgroundResource(R.drawable.board_colored);
 
         doneButton = new DoneButton(this, mainLayout, control);
+        missionCardButton = new MissionCardButton(this, mainLayout, control);
+        
         createArmies();
         selectedSourceTerritory = null;
         selectedTargetTerritory = null;
@@ -153,22 +159,27 @@ public class Main extends Activity {
 	}
 	
 	public void attackDialog() {
-    	AttackDialog dialog = new AttackDialog(this, control, (ViewGroup)getCurrentFocus());
+    	AttackDialog dialog = new AttackDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
     	dialog.show();
 	}
 	
 	public void endTurnDialog() {
-    	EndTurnDialog dialog = new EndTurnDialog(this, control, (ViewGroup)getCurrentFocus());
+		EndTurnDialog dialog = new EndTurnDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
     	dialog.show();
 	}
     
 	public void postBattleTacticalMoveDialog() {
-    	PostBattleMoveDialog dialog = new PostBattleMoveDialog(this, control, (ViewGroup)getCurrentFocus());
+    	PostBattleMoveDialog dialog = new PostBattleMoveDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
     	dialog.show();
 	}
 
 	public void winnerDialog() {
-    	WinnerDialog dialog = new WinnerDialog(this, control, (ViewGroup)getCurrentFocus());
+    	WinnerDialog dialog = new WinnerDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
+    	dialog.show();
+	}
+	
+	public void missionCardDialog(Mission mission) {
+    	MissionCardDialog dialog = new MissionCardDialog(this, control, (ViewGroup)getWindow().getCurrentFocus(), mission);
     	dialog.show();
 	}
 	
