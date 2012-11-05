@@ -9,6 +9,7 @@ import dk.stacktrace.risk.game_logic.Player;
 import dk.stacktrace.risk.game_logic.Territory;
 
 public abstract class Continent {
+	String name = "Continent";
 	ArrayList<Territory> territories;
 	int reinforcementBonus;
 	Board board;
@@ -29,5 +30,14 @@ public abstract class Continent {
 		return territories;
 	}
 	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getId()
+	{
+		return "NULL";
+	}
 
 }

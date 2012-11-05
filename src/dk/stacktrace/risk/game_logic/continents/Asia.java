@@ -29,6 +29,7 @@ public class Asia extends Continent {
 		territories = new ArrayList<Territory>();
 		reinforcementBonus = 7;
 		createTerritories();
+		name = "Asia";
 	}
 
 	protected void createTerritories() {
@@ -179,6 +180,12 @@ public class Asia extends Continent {
 
 	public Board getBoard() {
 		return board;
+	}
+
+	@Override
+	public String getId()
+	{
+		return "as";
 	}
 
 	

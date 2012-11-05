@@ -20,6 +20,7 @@ public class SouthAmerica extends Continent {
 		territories = new ArrayList<Territory>();
 		reinforcementBonus = 2;
 		createTerritories();
+		name = "South America";
 	}
 	
 	@Override
@@ -74,5 +75,11 @@ public class SouthAmerica extends Continent {
 
 	public Board getBoard() {
 		return board;
+	}
+
+	@Override
+	public String getId()
+	{
+		return "sa";
 	}
 }

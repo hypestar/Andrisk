@@ -23,6 +23,7 @@ public class Africa extends Continent {
 		territories = new ArrayList<Territory>();
 		reinforcementBonus = 3;
 		createTerritories();
+		name = "Africa";
 	}
 	
 	@Override
@@ -108,4 +109,10 @@ public class Africa extends Continent {
 		return board;
 	}
 
+	@Override
+	public String getId()
+	{
+		return "af";
+	}
+	
 }

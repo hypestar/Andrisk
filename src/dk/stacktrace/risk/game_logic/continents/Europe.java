@@ -23,6 +23,7 @@ public class Europe extends Continent {
 		territories = new ArrayList<Territory>();
 		reinforcementBonus = 5;
 		createTerritories();
+		name = "Europe";
 	}
 	
 	@Override
@@ -117,5 +118,11 @@ public class Europe extends Continent {
 
 	public Board getBoard() {
 		return board;
+	}
+
+	@Override
+	public String getId()
+	{
+		return "eu";
 	}
 }

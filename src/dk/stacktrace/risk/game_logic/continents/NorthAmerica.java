@@ -25,6 +25,7 @@ public class NorthAmerica extends Continent {
 		territories = new ArrayList<Territory>();
 		reinforcementBonus = 5;
 		createTerritories();
+		name = "North America";
 	}
 
 	@Override
@@ -138,6 +139,10 @@ public class NorthAmerica extends Continent {
 	public Board getBoard() {
 		return board;
 	}
-	
-	
+
+	@Override
+	public String getId()
+	{
+		return "na";
+	}
 }

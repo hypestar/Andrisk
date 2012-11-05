@@ -20,6 +20,7 @@ public class Australia extends Continent {
 		territories = new ArrayList<Territory>();
 		reinforcementBonus = 2;
 		createTerritories();
+		name = "Australia";
 	}
 
 	
@@ -74,6 +75,14 @@ public class Australia extends Continent {
 	}
 
 
+	@Override
+	public String getId()
+	{
+	
+		return "au";
+	}
+
+	
 
 
 	
