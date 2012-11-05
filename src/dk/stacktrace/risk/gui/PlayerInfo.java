@@ -15,6 +15,7 @@ public class PlayerInfo extends RelativeLayout {
 	private TextView playerName;
 	private TextView expectedReinforcement;
 	private TextView deploy;
+	private TextView numTerritories;
 	private RelativeLayout.LayoutParams playerInfoLayoutParams;
 	private RelativeLayout mainLayout;
 	
@@ -38,8 +39,8 @@ public class PlayerInfo extends RelativeLayout {
 		playerImage = new ImageView(context);
 		playerImage.setId(1);
 		RelativeLayout.LayoutParams armyImage_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		armyImage_lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-		armyImage_lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		armyImage_lp.addRule(RelativeLayout.ALIGN_TOP);
+		armyImage_lp.addRule(RelativeLayout.ALIGN_LEFT);
 		playerImage.setLayoutParams(armyImage_lp);
 				
 		// Player name
@@ -48,7 +49,7 @@ public class PlayerInfo extends RelativeLayout {
 		playerName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 30);
 		RelativeLayout.LayoutParams playerName_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		playerName_lp.addRule(RelativeLayout.RIGHT_OF, playerImage.getId());
-		playerName_lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		playerName_lp.addRule(RelativeLayout.ALIGN_TOP);
 		playerName.setLayoutParams(playerName_lp);
 		
 		// Expected reinforcement
@@ -56,7 +57,7 @@ public class PlayerInfo extends RelativeLayout {
 		expectedReinforcement.setId(3);
 		RelativeLayout.LayoutParams expectRein_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		expectRein_lp.addRule(RelativeLayout.BELOW, playerImage.getId());
-		expectRein_lp.addRule(ALIGN_PARENT_LEFT);
+		expectRein_lp.addRule(ALIGN_LEFT);
 		expectedReinforcement.setLayoutParams(expectRein_lp);
 
 		// Number of troops to deploy
@@ -64,8 +65,16 @@ public class PlayerInfo extends RelativeLayout {
 		deploy.setId(4);
 		RelativeLayout.LayoutParams deploy_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		deploy_lp.addRule(RelativeLayout.BELOW, expectedReinforcement.getId());
-		deploy_lp.addRule(ALIGN_PARENT_LEFT);
+		deploy_lp.addRule(ALIGN_LEFT);
 		deploy.setLayoutParams(deploy_lp);
+		
+		/*// Number of territories
+		numTerritories = new TextView(context);
+		numTerritories.setId(5);
+		RelativeLayout.LayoutParams numTerritories_lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		deploy_lp.addRule(RelativeLayout.BELOW, deploy.getId());
+		deploy_lp.addRule(ALIGN_LEFT);
+		deploy.setLayoutParams(numTerritories_lp);*/
 		
 		update();
 		
@@ -73,6 +82,7 @@ public class PlayerInfo extends RelativeLayout {
 		addView(playerName);
 		addView(expectedReinforcement);		
 		addView(deploy);
+		//addView(numTerritories);
 		
 		mainLayout.addView(this);
 	}
@@ -104,5 +114,6 @@ public class PlayerInfo extends RelativeLayout {
 		playerName.setText(control.getActivePlayer().getName());
 		expectedReinforcement.setText("Expected Reinforcement : " + control.calcReinforcementBonus(control.getActivePlayer()));
 		deploy.setText("Troops to deploy : " + control.getActivePlayer().getNumOfTroopsToDeploy());
+		//numTerritories.setText("Territories : " + control.getNumberOfTerritoriesOwnedBy(control.getActivePlayer()));
 	}
 }

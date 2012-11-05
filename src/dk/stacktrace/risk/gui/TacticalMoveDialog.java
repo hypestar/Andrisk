@@ -1,10 +1,9 @@
 package dk.stacktrace.risk.gui;
 
-import dk.stacktrace.risk.R;
-import dk.stacktrace.risk.controller.Controller;
-import dk.stacktrace.risk.game_logic.Territory;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +12,9 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import dk.stacktrace.risk.R;
+import dk.stacktrace.risk.controller.Controller;
+import dk.stacktrace.risk.game_logic.Territory;
 
 public class TacticalMoveDialog extends Dialog implements OnSeekBarChangeListener, android.view.View.OnClickListener{
 	Controller control;
@@ -45,6 +47,9 @@ public class TacticalMoveDialog extends Dialog implements OnSeekBarChangeListene
 		troopSeekBar = (SeekBar) layout.findViewById(R.id.troopsSeekBar1);
 		troopSeekBar.setMax(this.source.getArmySize()-1);
     	troopSeekBar.setOnSeekBarChangeListener(this);
+    	
+    	troopSeekBar.setThumb(new BitmapDrawable(BitmapFactory.decodeResource(
+        context.getResources(), getPlayersColor())));
 		
 		sourceName = (TextView) layout.findViewById(R.id.textSource);
 		sourceName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
@@ -103,4 +108,25 @@ public class TacticalMoveDialog extends Dialog implements OnSeekBarChangeListene
 			dismiss();
 		}
 	}
+	
+	// return the int from the R.java that matches the army image that corresponds to owners color
+		private int getPlayersColor()
+		{
+			switch (source.getOwner().getArmyColor()) {
+			case BLUE:
+				return dk.stacktrace.risk.R.drawable.army_blue;
+			case CYAN:
+				return dk.stacktrace.risk.R.drawable.army_cyan;
+			case GREEN:
+				return dk.stacktrace.risk.R.drawable.army_green;
+			case ORANGE:
+				return dk.stacktrace.risk.R.drawable.army_orange;
+			case PURPLE:
+				return dk.stacktrace.risk.R.drawable.army_purple;
+			case YELLOW:
+				return dk.stacktrace.risk.R.drawable.army_yellow;
+			default:
+				return dk.stacktrace.risk.R.drawable.army_cyan;
+			}
+		}
 }

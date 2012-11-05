@@ -6,6 +6,8 @@ import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +50,8 @@ public class PostBattleMoveDialog extends Dialog implements OnSeekBarChangeListe
 		troopSeekBar = (SeekBar) layout.findViewById(R.id.troopsSeekBar1);
 		troopSeekBar.setMax(control.getBattle().getAttackingArmy());
 		troopSeekBar.setProgress(troopSeekBar.getMax());
+		troopSeekBar.setThumb(new BitmapDrawable(BitmapFactory.decodeResource(
+		        context.getResources(), getPlayersColor())));
     	troopSeekBar.setOnSeekBarChangeListener(this);
 		
 		sourceName = (TextView) layout.findViewById(R.id.textSource);
@@ -101,4 +105,25 @@ public class PostBattleMoveDialog extends Dialog implements OnSeekBarChangeListe
 			dismiss();
 		}
 	}
+	
+	// return the int from the R.java that matches the army image that corresponds to owners color
+			private int getPlayersColor()
+			{
+				switch (source.getOwner().getArmyColor()) {
+				case BLUE:
+					return dk.stacktrace.risk.R.drawable.army_blue;
+				case CYAN:
+					return dk.stacktrace.risk.R.drawable.army_cyan;
+				case GREEN:
+					return dk.stacktrace.risk.R.drawable.army_green;
+				case ORANGE:
+					return dk.stacktrace.risk.R.drawable.army_orange;
+				case PURPLE:
+					return dk.stacktrace.risk.R.drawable.army_purple;
+				case YELLOW:
+					return dk.stacktrace.risk.R.drawable.army_yellow;
+				default:
+					return dk.stacktrace.risk.R.drawable.army_cyan;
+				}
+			}
 }
