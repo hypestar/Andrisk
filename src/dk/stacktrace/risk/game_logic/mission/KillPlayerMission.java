@@ -48,7 +48,7 @@ public class KillPlayerMission implements Mission
 		ArrayList<Player> players = (ArrayList<Player>) game.getPlayers().clone();
 		Collections.shuffle(players);
 
-		Log.v("setMissionOwner", "targets " + KillPlayerMission.targets);
+		//Log.v("setMissionOwner", "targets " + KillPlayerMission.targets);
 		if((missionOwner == null)) 
 		{
 			missionOwner = player;
@@ -58,10 +58,10 @@ public class KillPlayerMission implements Mission
 				{
 					target = p;
 					KillPlayerMission.targets.add(p);
-
+					//Log.v("setMissionOwner", "target set to " + target);
+					return;
 				}
 			}
-			Log.v("setMissionOwner", "target set to " + target);
 		}
 	}
 
@@ -72,6 +72,7 @@ public class KillPlayerMission implements Mission
 
 	public String getMissionId()
 	{
+		System.out.println("kill_" + target.getArmyColor().toString().toLowerCase());
 		return "kill_" + target.getArmyColor().toString().toLowerCase();
 	}
 

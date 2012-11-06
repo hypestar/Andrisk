@@ -53,6 +53,7 @@ public class Board {
 	private void createMissions()
 	{
 		missions = new ArrayList<Mission>();
+		
 		missions.add(new ContinentMission(europe, australia, true, this));
 		missions.add(new ContinentMission(europe, southAmerica, true, this));
 		missions.add(new ContinentMission(northAmerica, africa, false, this));
@@ -60,14 +61,17 @@ public class Board {
 		missions.add(new ContinentMission(asia, southAmerica, false, this));
 		missions.add(new ContinentMission(asia, africa, false, this));
 		
-		/*for (int i = 0; i < game.getPlayers().size();i++)
+		// We don't want kill mission if it's a two player game.
+		if (game.getNumberOfPlayers() > 2)
 		{
-			missions.add(new KillPlayerMission(game));
-		}*/
-
+			for (int i = 0; i < game.getNumberOfPlayers() / 2;i++)
+			{
+				missions.add(new KillPlayerMission(game));
+			}
+		}
+		
 		missions.add(new TwentyFourTerritoriesMission(this));
 		missions.add(new EighteenTerritoriesMission(this));
-		Log.v("Create Missions done", "missions : " +  missions);
 	}
 
 

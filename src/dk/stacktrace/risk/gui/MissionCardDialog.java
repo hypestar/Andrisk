@@ -126,6 +126,10 @@ public class MissionCardDialog extends Dialog implements OnClickListener{
 		{
 			return dk.stacktrace.risk.R.drawable.mission_kill_cyan;
 		}
+		else if(missionId.equals("kill_blue"))
+		{
+			return dk.stacktrace.risk.R.drawable.mission_kill_blue;
+		}
 		else
 		{
 			return dk.stacktrace.risk.R.drawable.mission_cards_back;			

@@ -258,4 +258,9 @@ public class RiskGame {
 	{
 		return players;
 	}
+	
+	public int getNumberOfPlayers()
+	{
+		return players.size();
+	}
 }
