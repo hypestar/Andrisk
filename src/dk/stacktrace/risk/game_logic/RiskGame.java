@@ -193,10 +193,10 @@ public class RiskGame {
 		return targetTerritory;
 	}
 	
-	public Battle createBattle() {
+	public Battle createBattle(int attackingArmy) {
 		if (sourceTerritory != null && targetTerritory != null)
 		{
-			battle = new Battle(sourceTerritory, targetTerritory);
+			battle = new Battle(sourceTerritory, targetTerritory, attackingArmy);
 			return battle;
 		}
 		return null;

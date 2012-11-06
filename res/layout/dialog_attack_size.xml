@@ -58,6 +58,6 @@
         android:layout_below="@+id/troopsSeekBar1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="63dp"
-        android:text="Move Troops" />
+        android:text="Attack" />
 
 </RelativeLayout>

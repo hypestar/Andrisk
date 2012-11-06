@@ -221,12 +221,17 @@ public class Controller implements OnTouchListener{
 				else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && getSourceSelection() != null && army.getTerritory().isNeighbour(getSourceSelection()))
 				{
 					setTargetTerritory(army.getTerritory());
-					game.createBattle();
-					main.attackDialog();
-					
-					
-					//resetTerritorySelections();
-					//main.updateTerritorySelections();
+
+					// if the attacker only has two troops then we skip the attackSizeDialog
+					if(getSourceSelection().getArmySize() == 2)
+					{
+						getSourceSelection().moveTroops(1);
+						startBattle(1);
+					}
+					else
+					{
+						main.attackSizeDialog();
+					}
 					return true;
 				}
 				return false;
@@ -278,9 +283,8 @@ public class Controller implements OnTouchListener{
 		{
 			GameSound.playSound(main, GameSound.VICTORY);
 			battle.getDefendingTerritory().setOwner(winner);	
-			battle.getDefendingTerritory().reinforce(1);
-			battle.setAttackingArmy(battle.getAttackingArmy() - 1);
-
+			battle.getDefendingTerritory().reinforce(battle.getAttackingArmy());
+			
 			if(game.isOnlyOneAlive(winner))
 			{
 				game.setGameWinner(winner);
@@ -289,11 +293,6 @@ public class Controller implements OnTouchListener{
 				
 				main.winnerDialog();
 				return;
-			}
-			
-			if(battle.getAttackingArmy() > 0)
-			{
-				main.postBattleTacticalMoveDialog();
 			}
 		}
 		
@@ -360,5 +359,13 @@ public class Controller implements OnTouchListener{
 	public int getNumberOfTerritoriesOwnedBy(Player player)
 	{
 		return board.getNumberOfTerritoriesOwnedBy(player);
+	}
+
+
+
+	public void startBattle(int attackingArmy)
+	{
+		game.createBattle(attackingArmy);
+		main.attackDialog();
 	}
 }

@@ -13,13 +13,13 @@ public class Battle
 	private ArrayList<Dice> winnerDices, attackDices, defendDices;
 	private Player winner;
 
-	public Battle(Territory attackingTerritory, Territory defendingTerritory)
+	public Battle(Territory attackingTerritory, Territory defendingTerritory, int attackingArmy)
 	{
 		this.attackingTerritory = attackingTerritory;
 		this.defendingTerritory = defendingTerritory;
+		this.attackingArmy = attackingArmy;
 		winner = null;
 		
-		attackingArmy = attackingTerritory.getArmySize() - 1;
 		attackingTerritory.moveTroops(attackingArmy);
 	}
 

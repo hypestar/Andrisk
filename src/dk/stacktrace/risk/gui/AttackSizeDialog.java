@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,39 +18,39 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-public class PostBattleMoveDialog extends Dialog implements OnSeekBarChangeListener, android.view.View.OnClickListener{
+public class AttackSizeDialog extends Dialog implements OnSeekBarChangeListener, android.view.View.OnClickListener{
 	Controller control;
 	Context context;
 	LayoutInflater inflater;
 	View layout;
 	
+	int attackingArmy;
 	Territory source, target;
 	
 	SeekBar troopSeekBar;
 	TextView sourceName, sourceTroops, targetName, targetTroops;
-	Button moveBtn;
+	Button attackBtn;
 	
-	int numOfTroopsToMove;
-	
-	public PostBattleMoveDialog(Context context,Controller control, ViewGroup rootElement)
+
+	public AttackSizeDialog(Context context,Controller control, ViewGroup rootElement)
 	{
 		super(context);
 		
 		this.context = context;
 		this.control = control;
-		this.source = control.getBattle().getAttackingTerritory();
-		this.target = control.getBattle().getDefendingTerritory();
+		this.source = control.getSourceSelection();
+		this.target = control.getTargetSelection();
 		
 		setCancelable(false);
 		
 		inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		layout = inflater.inflate(R.layout.dialog_postbattletacticalmove, rootElement);
+		layout = inflater.inflate(R.layout.dialog_attack_size, rootElement);
 		setContentView(layout);
-		setTitle("Post Battle Tactical Move");	
+		setTitle("Decide the size of the attacking army.");	
 		
 		troopSeekBar = (SeekBar) layout.findViewById(R.id.troopsSeekBar1);
-		troopSeekBar.setMax(control.getBattle().getAttackingArmy());
-		troopSeekBar.setProgress(troopSeekBar.getMax());
+		troopSeekBar.setMax(source.getArmySize() - 1);
+		troopSeekBar.setProgress(0);
 		troopSeekBar.setThumb(new BitmapDrawable(BitmapFactory.decodeResource(
 		        context.getResources(), getPlayersColor())));
     	troopSeekBar.setOnSeekBarChangeListener(this);
@@ -66,20 +67,23 @@ public class PostBattleMoveDialog extends Dialog implements OnSeekBarChangeListe
 		targetName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
 		targetName.setText(this.target.getName());
 		
+		attackingArmy = troopSeekBar.getProgress();
+		
 		targetTroops = (TextView) layout.findViewById(R.id.textTargetTroops);
 		targetTroops.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-    	targetTroops.setText(this.target.getArmySize() + troopSeekBar.getMax() + "");
+    	targetTroops.setText(attackingArmy + "");
     	
-    	moveBtn = (Button) layout.findViewById(R.id.buttonMove);
-    	moveBtn.setOnClickListener(this);
+    	attackBtn = (Button) layout.findViewById(R.id.buttonMove);
+    	attackBtn.setOnClickListener(this);
 	}
 
 	
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-		sourceTroops.setText((source.getArmySize() + (troopSeekBar.getMax() - progress)) + "");
-		targetTroops.setText((target.getArmySize() + progress) + "");
-		numOfTroopsToMove = progress;
+		
+		attackingArmy = progress;
+		sourceTroops.setText((source.getArmySize() - attackingArmy) + "");
+		targetTroops.setText(attackingArmy + "");
 	}
 
 	public void onStartTrackingTouch(SeekBar seekBar) {
@@ -97,12 +101,18 @@ public class PostBattleMoveDialog extends Dialog implements OnSeekBarChangeListe
 	public void onClick(View v) {
 		if (((Button) v).getId() == R.id.buttonMove)
 		{
-			source.reinforce(troopSeekBar.getMax() - troopSeekBar.getProgress());
-			target.reinforce(troopSeekBar.getProgress());
-			control.resetTerritorySelections();
-			((Main) context).update();
-		
-			dismiss();
+			if (attackingArmy > 0)
+			{
+				source.moveTroops(attackingArmy);
+				control.startBattle(attackingArmy);
+				dismiss();
+			}
+			else
+			{
+				control.resetTerritorySelections();	
+				((Main) context).update();
+				dismiss();
+			}
 		}
 	}
 	

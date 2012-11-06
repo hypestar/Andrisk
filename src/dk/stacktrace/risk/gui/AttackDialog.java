@@ -180,7 +180,7 @@ public class AttackDialog extends Dialog implements OnClickListener{
 			         public void run() { 
 			              dismiss();
 			              control.postBattle();
-			              ((Main)context).update();
+			              //((Main)context).update();
 			         } 
 			    }, 2000);
 			    

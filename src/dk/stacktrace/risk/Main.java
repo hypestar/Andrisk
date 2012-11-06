@@ -27,7 +27,7 @@ import dk.stacktrace.risk.gui.EndTurnDialog;
 import dk.stacktrace.risk.gui.MissionCardButton;
 import dk.stacktrace.risk.gui.MissionCardDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
-import dk.stacktrace.risk.gui.PostBattleMoveDialog;
+import dk.stacktrace.risk.gui.AttackSizeDialog;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
 import dk.stacktrace.risk.gui.WinnerDialog;
@@ -168,8 +168,8 @@ public class Main extends Activity {
     	dialog.show();
 	}
     
-	public void postBattleTacticalMoveDialog() {
-    	PostBattleMoveDialog dialog = new PostBattleMoveDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
+	public void attackSizeDialog() {
+    	AttackSizeDialog dialog = new AttackSizeDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
     	dialog.show();
 	}
 
