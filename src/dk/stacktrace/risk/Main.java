@@ -3,31 +3,26 @@ package dk.stacktrace.risk;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import dk.stacktrace.risk.controller.Controller;
 import dk.stacktrace.risk.game_logic.Territory;
 import dk.stacktrace.risk.game_logic.mission.Mission;
 import dk.stacktrace.risk.gui.Army;
 import dk.stacktrace.risk.gui.AttackDialog;
+import dk.stacktrace.risk.gui.AttackSizeDialog;
 import dk.stacktrace.risk.gui.DoneButton;
 import dk.stacktrace.risk.gui.EndTurnDialog;
 import dk.stacktrace.risk.gui.MissionCardButton;
 import dk.stacktrace.risk.gui.MissionCardDialog;
+import dk.stacktrace.risk.gui.MissionWinnerDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
-import dk.stacktrace.risk.gui.AttackSizeDialog;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
 import dk.stacktrace.risk.gui.WinnerDialog;
@@ -175,6 +170,11 @@ public class Main extends Activity {
 
 	public void winnerDialog() {
     	WinnerDialog dialog = new WinnerDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
+    	dialog.show();
+	}
+	
+	public void missionWinnerDialog() {
+    	MissionWinnerDialog dialog = new MissionWinnerDialog(this, control, (ViewGroup)getWindow().getCurrentFocus());
     	dialog.show();
 	}
 	

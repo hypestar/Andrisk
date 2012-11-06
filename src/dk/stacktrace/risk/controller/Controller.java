@@ -67,8 +67,6 @@ public class Controller implements OnTouchListener{
 	}
 
 
-
-
 	public void dealTerritories()
 	{
 		game.dealTerritories();
@@ -315,7 +313,7 @@ public class Controller implements OnTouchListener{
 		{
 			Log.v("Winner by mission", "Winner is " + getActivePlayer().getName());
 			Log.v(getActivePlayer().getName() + "'s mission", "" + getActivePlayer().getMission().getMissionDescription());
-			main.winnerDialog();
+			main.missionWinnerDialog();
 		}
 		
 		Log.v("MISSION CARD", getActivePlayer().getName() + "'s mission : " + getActivePlayer().getMission().getMissionDescription());

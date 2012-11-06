@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/missionWinnerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/winnerMissionCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/missionWinnerText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/mission_cards_back" />
+
+    <Button
+        android:id="@+id/missionRematchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/winnerMissionCard"
+        android:layout_below="@+id/winnerMissionCard"
+        android:layout_marginTop="23dp"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/missionNewGameBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/missionRematchBtn"
+        android:layout_alignBottom="@+id/missionRematchBtn"
+        android:layout_centerHorizontal="true"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/missionQuitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/missionNewGameBtn"
+        android:layout_alignBottom="@+id/missionNewGameBtn"
+        android:layout_alignRight="@+id/winnerMissionCard"
+        android:text="Button" />
+
+</RelativeLayout>
