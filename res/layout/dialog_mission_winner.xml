@@ -29,7 +29,7 @@
         android:layout_alignLeft="@+id/winnerMissionCard"
         android:layout_below="@+id/winnerMissionCard"
         android:layout_marginTop="23dp"
-        android:text="Button" />
+        android:text="Rematch" />
 
     <Button
         android:id="@+id/missionNewGameBtn"
@@ -37,8 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/missionRematchBtn"
         android:layout_alignBottom="@+id/missionRematchBtn"
-        android:layout_centerHorizontal="true"
-        android:text="Button" />
+        android:layout_toRightOf="@+id/missionRematchBtn"
+        android:text="New Game" />
 
     <Button
         android:id="@+id/missionQuitBtn"
@@ -47,6 +47,7 @@
         android:layout_alignBaseline="@+id/missionNewGameBtn"
         android:layout_alignBottom="@+id/missionNewGameBtn"
         android:layout_alignRight="@+id/winnerMissionCard"
-        android:text="Button" />
+        android:layout_toRightOf="@+id/missionNewGameBtn"
+        android:text="Quit" />
 
 </RelativeLayout>

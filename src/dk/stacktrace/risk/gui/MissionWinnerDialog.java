@@ -68,6 +68,7 @@ public class MissionWinnerDialog extends Dialog implements OnClickListener{
 	public void onClick(View v) {
 		if(((Button) v).getId() == R.id.missionRematchBtn)
 		{
+			control.rematch();
 			dismiss();
 		}
 		else if (((Button) v).getId() == R.id.missionNewGameBtn)

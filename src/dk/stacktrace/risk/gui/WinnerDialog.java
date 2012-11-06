@@ -63,6 +63,7 @@ public class WinnerDialog extends Dialog implements OnClickListener{
 	public void onClick(View v) {
 		if(((Button) v).getId() == R.id.rematchBtn)
 		{
+			control.rematch();
 			dismiss();
 		}
 		else if (((Button) v).getId() == R.id.newGameBtn)

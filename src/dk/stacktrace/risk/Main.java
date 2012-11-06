@@ -70,10 +70,15 @@ public class Main extends Activity {
         selectedSourceTerritory = null;
         selectedTargetTerritory = null;
         setContentView(mainLayout);
-        
-        
     }
 
+    public void rematch()
+    {
+    	createArmies();
+        selectedSourceTerritory = null;
+        selectedTargetTerritory = null;
+    }
+    
     private void createArmies() {
     	ArrayList<Territory> allTerritories = control.getAllTerritories();
     	Log.v("createArmies", "num of allTerritories " + allTerritories.size());

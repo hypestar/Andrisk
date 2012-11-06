@@ -58,14 +58,23 @@ public class Controller implements OnTouchListener{
 		game = new RiskGame(players);
 		board = game.getBoard();
 		
-		
-		
 		dealTerritories();
 		game.dealMissions();
 		gotoIntitialReinforcementPhase();
 		
 	}
 
+	public void rematch()
+	{
+		game = new RiskGame(game.getPlayers());
+		board = game.getBoard();
+		
+		dealTerritories();
+		game.dealMissions();
+		main.rematch();
+		main.update();
+		gotoIntitialReinforcementPhase();
+	}
 
 	public void dealTerritories()
 	{
