@@ -71,6 +71,8 @@ public class Board {
 		}
 		
 		missions.add(new TwentyFourTerritoriesMission(this));
+		missions.add(new TwentyFourTerritoriesMission(this));
+		missions.add(new EighteenTerritoriesMission(this));
 		missions.add(new EighteenTerritoriesMission(this));
 	}
 

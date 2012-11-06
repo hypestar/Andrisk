@@ -5,13 +5,14 @@ import dk.stacktrace.risk.game_logic.Player;
 
 public class TwentyFourTerritoriesMission implements Mission
 {
-
 	private Board board;
 	private Player missionOwner;
+	private int numOfViews;
 	
 	public TwentyFourTerritoriesMission(Board board)
 	{
 		this.board = board;
+		numOfViews = 0;
 	}
 
 	public boolean missionAccomplished()
@@ -43,4 +44,13 @@ public class TwentyFourTerritoriesMission implements Mission
 		return "24";
 	}
 
+	public void registerMissionView()
+	{
+		++numOfViews;
+	}
+
+	public int getNumberOfViews()
+	{
+		return numOfViews;
+	}
 }

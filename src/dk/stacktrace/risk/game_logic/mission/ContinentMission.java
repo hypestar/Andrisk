@@ -10,6 +10,7 @@ public class ContinentMission implements Mission
 	private Continent ContinentOne, ContinentTwo;
 	private Board board;
 	private Player missionOwner;
+	private int numOfViews;
 
 	public ContinentMission(Continent continentOne, Continent continentTwo, boolean plusOne, Board board)
 	{
@@ -18,6 +19,7 @@ public class ContinentMission implements Mission
 		this.plusOne = plusOne;
 		this.board = board;
 		missionOwner = null;
+		numOfViews = 0;
 	}
 	
 
@@ -65,5 +67,16 @@ public class ContinentMission implements Mission
 	public String getMissionId()
 	{
 		return "continent_" + ContinentOne.getId() + "_" + ContinentTwo.getId();
+	}
+
+	public void registerMissionView()
+	{
+		++numOfViews;
+	}
+
+
+	public int getNumberOfViews()
+	{
+		return numOfViews;
 	}
 }

@@ -9,4 +9,6 @@ public interface Mission
 	public void setMissionOwner(Player player);
 	public Player getMissionOwner();
 	public String getMissionId();
+	public void registerMissionView();
+	public int getNumberOfViews();
 }

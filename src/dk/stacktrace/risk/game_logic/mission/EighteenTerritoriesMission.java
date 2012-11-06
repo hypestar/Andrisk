@@ -10,10 +10,12 @@ public class EighteenTerritoriesMission implements Mission
 {
 	private Board board;
 	private Player missionOwner;
+	private int numOfViews;
 	
 	public EighteenTerritoriesMission(Board board)
 	{
 		this.board = board;
+		numOfViews = 0;
 	}
 
 	public boolean missionAccomplished()
@@ -52,4 +54,13 @@ public class EighteenTerritoriesMission implements Mission
 		return "18";
 	}
 
+	public void registerMissionView()
+	{
+		++numOfViews;
+	}
+
+	public int getNumberOfViews()
+	{
+		return numOfViews;
+	}
 }

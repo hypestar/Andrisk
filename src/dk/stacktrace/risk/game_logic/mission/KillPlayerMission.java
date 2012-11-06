@@ -13,13 +13,14 @@ public class KillPlayerMission implements Mission
 	private static ArrayList<Player> targets = new ArrayList<Player>();
 	private RiskGame game;
 	private Player missionOwner, target;
+	private int numOfViews;
 	
 	public KillPlayerMission(RiskGame game)
 	{
 		missionOwner = null;
 		target = null;
 		this.game = game;
-		//KillPlayerMission.targets = (KillPlayerMission.targets != null) ? new ArrayList<Player>() : null; 
+		numOfViews = 0;
 	}
 
 	public boolean missionAccomplished()
@@ -76,4 +77,13 @@ public class KillPlayerMission implements Mission
 		return "kill_" + target.getArmyColor().toString().toLowerCase();
 	}
 
+	public void registerMissionView()
+	{
+		++numOfViews;
+	}
+
+	public int getNumberOfViews()
+	{
+		return numOfViews;
+	}
 }

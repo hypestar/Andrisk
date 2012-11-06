@@ -39,7 +39,7 @@ public class MissionCardDialog extends Dialog implements OnClickListener{
 		
 		setCanceledOnTouchOutside(true);
 		
-		setTitle("Secret Andrisk Mission");
+		setTitle("Secret Andrisk Mission has been viewed " + mission.getNumberOfViews() + " times.");
 		
 		
 		card = (ImageView) findViewById(R.id.missionCard);
@@ -57,6 +57,8 @@ public class MissionCardDialog extends Dialog implements OnClickListener{
 			if(back){
 				card.setImageResource(getMissionCardImageResource());
 				back = false;
+				mission.registerMissionView();
+				setTitle("Secret Andrisk Mission has been viewed " + mission.getNumberOfViews() + " times.");
 			}
 			else 
 			{
