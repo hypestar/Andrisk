@@ -28,14 +28,9 @@ public class DoneButton extends RelativeLayout
 		buttonLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		
 		this.setLayoutParams(buttonLayoutParams);
-
-		/*buttonImageLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-		buttonImageLayoutParams.addRule(RelativeLayout.ALIGN_BOTTOM);
-		buttonImageLayoutParams.addRule(RelativeLayout.ALIGN_LEFT);*/
 		
 		buttonImage = new ImageView(context);
 		buttonImage.setImageResource(R.drawable.done_button);
-		//buttonImage.setLayoutParams(buttonImageLayoutParams);
 		
 		addView(buttonImage);
 		

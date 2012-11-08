@@ -3,6 +3,7 @@ package dk.stacktrace.risk;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,10 +38,37 @@ public class Main extends Activity {
 	private TerritoryHighlight selectedSourceTerritory, selectedTargetTerritory;
 	private DoneButton doneButton;
 	private MissionCardButton missionCardButton;
+	private ArrayList<String> playerNames;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+        playerNames = new ArrayList<String>();	
+        playerNames.add(extras.getString(CreatePlayers.PLAYER1NAME));
+        playerNames.add(extras.getString(CreatePlayers.PLAYER2NAME));
+        playerNames.add(extras.getString(CreatePlayers.PLAYER3NAME));
+        playerNames.add(extras.getString(CreatePlayers.PLAYER4NAME));
+        playerNames.add(extras.getString(CreatePlayers.PLAYER5NAME));
+        playerNames.add(extras.getString(CreatePlayers.PLAYER6NAME));
+        for (String name : playerNames)
+        {
+        	if (name == null)name = "";
+        	System.out.println(name);
+        }
+        }
+        else
+        {
+        	System.out.println("Bummer, no extras received!");
+        }
+       /* System.out.println(intent.getStringExtra(CreatePlayers.PLAYER2NAME));
+        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER3NAME));
+        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER4NAME));
+        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER5NAME));
+        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER6NAME));*/
         
         GameSound.initSounds(this); // preload game sounds 
         
