@@ -19,8 +19,6 @@ public class Battle
 		this.defendingTerritory = defendingTerritory;
 		this.attackingArmy = attackingArmy;
 		winner = null;
-		
-		attackingTerritory.moveTroops(attackingArmy);
 	}
 
 	public void fight()
