@@ -63,6 +63,52 @@ public class Controller implements OnTouchListener{
 		gotoIntitialReinforcementPhase();
 		
 	}
+	
+	public void startNewGame(ArrayList<String> playerNames)
+	{
+		ArrayList<Player> players = new ArrayList<Player>();
+		ArmyColor color;
+		
+		System.out.println("startNewGame : number of player names" + playerNames.size());
+
+		for (int playerNumber = 0;playerNumber < playerNames.size();playerNumber++)
+		{
+			if (!playerNames.get(playerNumber).trim().matches(""))
+			{
+				switch (playerNumber)
+				{
+				case 0:
+					color = ArmyColor.ORANGE;
+					break;
+				case 1:
+					color = ArmyColor.CYAN;
+					break;
+				case 2:
+					color = ArmyColor.YELLOW;
+					break;
+				case 3:
+					color = ArmyColor.BLUE;
+					break;
+				case 4:
+					color = ArmyColor.PURPLE;
+					break;
+				case 5:
+					color = ArmyColor.GREEN;
+					break;
+				default:
+					color = null;
+				}
+				System.out.println("adding player " + playerNames.get(playerNumber) + " with color " ); //color.toString());
+				players.add(new Player(playerNames.get(playerNumber), color));
+			}
+		}
+		game = new RiskGame(players);
+		board = game.getBoard();
+		
+		dealTerritories();
+		game.dealMissions();
+		gotoIntitialReinforcementPhase();
+	}
 
 	public void rematch()
 	{

@@ -7,17 +7,19 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.View.OnKeyListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CreatePlayers extends Activity implements OnFocusChangeListener, OnClickListener {
+public class CreatePlayers extends Activity implements OnClickListener, OnKeyListener {
 
 	public final static String PLAYER1NAME = "dk.stacktrace.risk.PLAYER1";
 	public final static String PLAYER2NAME = "dk.stacktrace.risk.PLAYER2";
@@ -26,9 +28,9 @@ public class CreatePlayers extends Activity implements OnFocusChangeListener, On
 	public final static String PLAYER5NAME = "dk.stacktrace.risk.PLAYER5";
 	public final static String PLAYER6NAME = "dk.stacktrace.risk.PLAYER6";
 	
-	TextView p1, p2, p3, p4, p5, p6;
+	EditText p1, p2, p3, p4, p5, p6;
 	ImageView battleBtn;
-	ArrayList<TextView> playerNames;
+	ArrayList<EditText> playerNames;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,14 +44,14 @@ public class CreatePlayers extends Activity implements OnFocusChangeListener, On
         
         setContentView(R.layout.activity_create_players);
         
-        p1 = (TextView) findViewById(R.id.player1);
-        p2 = (TextView) findViewById(R.id.player2);
-        p3 = (TextView) findViewById(R.id.player3);
-        p4 = (TextView) findViewById(R.id.player4);
-        p5 = (TextView) findViewById(R.id.player5);
-        p6 = (TextView) findViewById(R.id.player6);
+        p1 = (EditText) findViewById(R.id.player1);
+        p2 = (EditText) findViewById(R.id.player2);
+        p3 = (EditText) findViewById(R.id.player3);
+        p4 = (EditText) findViewById(R.id.player4);
+        p5 = (EditText) findViewById(R.id.player5);
+        p6 = (EditText) findViewById(R.id.player6);
         
-        playerNames = new ArrayList<TextView>();
+        playerNames = new ArrayList<EditText>();
         playerNames.add(p1);
         playerNames.add(p2);
         playerNames.add(p3);
@@ -57,7 +59,10 @@ public class CreatePlayers extends Activity implements OnFocusChangeListener, On
         playerNames.add(p5);
         playerNames.add(p6);
         
-        p1.setOnFocusChangeListener(this);
+        for (EditText playerName : playerNames)
+        {
+        	playerName.setOnKeyListener(this);
+        }
         
         battleBtn = (ImageView) findViewById(R.id.startBattleBtn);
         battleBtn.setOnClickListener(this);
@@ -71,19 +76,7 @@ public class CreatePlayers extends Activity implements OnFocusChangeListener, On
 
 	public void onFocusChange(View v, boolean hasFocus)
 	{
-	/*	Log.v("Focus changed", "hej");
-		if (isReadyToBattle())
-		{
-			System.out.println("hej");
-			battleBtn.setImageResource(R.drawable.start_battle_btn);
-			battleBtn.setOnClickListener(this);
-		}
-		else
-		{
-			System.out.println("Hej hej");
-			battleBtn.setImageResource(R.drawable.start_battle_btn_inactive);
-			battleBtn.setOnClickListener(null);
-		}*/
+	
 		
 	}
 
@@ -112,7 +105,20 @@ public class CreatePlayers extends Activity implements OnFocusChangeListener, On
 			intent.putExtra(PLAYER6NAME, p6.getText().toString());
 		    startActivity(intent);	
 		}
-		 
-		
+	}
+
+	public boolean onKey(View v, int keyCode, KeyEvent event)
+	{
+		if(isReadyToBattle())
+		{
+			battleBtn.setOnClickListener(this);
+			battleBtn.setImageResource(R.drawable.start_battle_btn);
+		}
+		else
+		{
+			battleBtn.setOnClickListener(null);
+			battleBtn.setImageResource(R.drawable.start_battle_btn_inactive);
+		}
+		return true;
 	}
 }

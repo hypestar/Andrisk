@@ -61,6 +61,7 @@ public class RiskGame {
 		
 		for (Player player : players) 
 		{
+			System.out.println("player " + player.getName() + "gets reinf. " + initialReinforcement );
 			player.reinforcement(initialReinforcement);
 		}
 	}

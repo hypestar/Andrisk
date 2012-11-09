@@ -47,37 +47,26 @@ public class Main extends Activity {
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
-        playerNames = new ArrayList<String>();	
-        playerNames.add(extras.getString(CreatePlayers.PLAYER1NAME));
-        playerNames.add(extras.getString(CreatePlayers.PLAYER2NAME));
-        playerNames.add(extras.getString(CreatePlayers.PLAYER3NAME));
-        playerNames.add(extras.getString(CreatePlayers.PLAYER4NAME));
-        playerNames.add(extras.getString(CreatePlayers.PLAYER5NAME));
-        playerNames.add(extras.getString(CreatePlayers.PLAYER6NAME));
-        for (String name : playerNames)
-        {
-        	if (name == null)name = "";
-        	System.out.println(name);
-        }
+        	playerNames = new ArrayList<String>();	
+        	playerNames.add(extras.getString(CreatePlayers.PLAYER1NAME));
+        	playerNames.add(extras.getString(CreatePlayers.PLAYER2NAME));
+        	playerNames.add(extras.getString(CreatePlayers.PLAYER3NAME));
+        	playerNames.add(extras.getString(CreatePlayers.PLAYER4NAME));
+        	playerNames.add(extras.getString(CreatePlayers.PLAYER5NAME));
+        	playerNames.add(extras.getString(CreatePlayers.PLAYER6NAME));
         }
         else
         {
         	System.out.println("Bummer, no extras received!");
         }
-       /* System.out.println(intent.getStringExtra(CreatePlayers.PLAYER2NAME));
-        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER3NAME));
-        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER4NAME));
-        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER5NAME));
-        System.out.println(intent.getStringExtra(CreatePlayers.PLAYER6NAME));*/
         
         GameSound.initSounds(this); // preload game sounds 
         
         control = new Controller(this);
-        control.createTestGame();
-        control.dealTerritories();
-        Log.v("MAIN", "after controller");
-        
-        
+        control.startNewGame(playerNames);
+        //control.createTestGame();
+        //control.dealTerritories();
+         
         mainLayout = new RelativeLayout(this);
         playerInfo = new PlayerInfo(this, control, mainLayout);
         
