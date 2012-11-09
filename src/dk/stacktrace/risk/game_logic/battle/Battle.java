@@ -49,7 +49,8 @@ public class Battle
 		Collections.sort(defendDices,Collections.reverseOrder());
 
 		winnerDices = new ArrayList<Dice>();
-		for (int i = 0; i < getNumOfDicesToComapre(); i++)
+		int numOfDicesToComapre = getNumOfDicesToCompare();
+		for (int i = 0; i < numOfDicesToComapre; i++)
 		{
 			if (defendDices.get(i).compareTo(attackDices.get(i)) > 0)
 			{
@@ -194,7 +195,7 @@ public class Battle
 		return winnerDices;
 	}
 
-	private int getNumOfDicesToComapre()
+	private int getNumOfDicesToCompare()
 	{
 		if (getNumOfAttackDices() < getNumOfDefendDices())
 		{
