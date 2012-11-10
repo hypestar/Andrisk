@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Handler;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -30,7 +31,7 @@ public class AttackDialog extends Dialog implements OnClickListener{
 	Battle battle;
 	Button fightBtn, retreatBtn;
 	TextView attackingTerritory, attackingArmy, defendingTerritory, defendingArmy;
-	ImageView attackDice1, attackDice2, attackDice3, defendDice1, defendDice2;
+	ImageView attackDice1, attackDice2, attackDice3, defendDice1, defendDice2, gun1stDice, gun2ndDice;
 	ArrayList<ImageView> attackDices, defendDices;
 	Context context;
 	
@@ -69,6 +70,13 @@ public class AttackDialog extends Dialog implements OnClickListener{
 		defendingArmy = (TextView) findViewById(R.id.defendArmy);
 		defendingArmy.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 40);
 
+		gun1stDice = (ImageView) findViewById(R.id.ak47_1);
+		gun1stDice.setVisibility(View.INVISIBLE);
+		
+		gun2ndDice = (ImageView) findViewById(R.id.ak47_2);
+		gun2ndDice.setVisibility(View.INVISIBLE);
+		
+		
 		initDices();
 		update();
 		
@@ -167,6 +175,47 @@ public class AttackDialog extends Dialog implements OnClickListener{
 	private void fight()
 	{
 		battle.fight();
+		
+		gun1stDice.setVisibility(View.INVISIBLE);
+		gun2ndDice.setVisibility(View.INVISIBLE);
+		
+		attackingArmy.setTextColor(Color.parseColor("#000000"));
+		defendingArmy.setTextColor(Color.parseColor("#000000"));
+		
+		for (int diceNum = 0; diceNum < battle.getWinnerDices().size(); diceNum++)
+		{
+			if (diceNum == 0)
+			{
+				if(battle.getWinnerDices().get(diceNum).isAttackDice())
+				{
+					gun1stDice.setImageResource(R.drawable.ak47_kill_defense);
+					defendingArmy.setTextColor(Color.parseColor("#d82323"));
+				}
+				else
+				{
+					gun1stDice.setImageResource(R.drawable.ak47_kill_attack);
+					attackingArmy.setTextColor(Color.parseColor("#d82323"));
+				}
+				gun1stDice.setVisibility(View.VISIBLE);
+			}
+			
+			if (diceNum == 1)
+			{
+				if(battle.getWinnerDices().get(diceNum).isAttackDice())
+				{
+					gun2ndDice.setImageResource(R.drawable.ak47_kill_defense);
+					defendingArmy.setTextColor(Color.parseColor("#d82323"));
+				}
+				else
+				{
+					gun2ndDice.setImageResource(R.drawable.ak47_kill_attack);
+					attackingArmy.setTextColor(Color.parseColor("#d82323"));
+				}
+				gun2ndDice.setVisibility(View.VISIBLE);
+			}
+		}
+		
+		
 		update();
 		updateDices();
 		if (battle.battleIsOver())

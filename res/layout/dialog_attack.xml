@@ -107,4 +107,20 @@
         android:layout_alignRight="@+id/defendDice2"
         android:text="Retreat" />
 
+    <ImageView
+        android:id="@+id/ak47_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/defendDice1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ak47_kill_attack" />
+
+    <ImageView
+        android:id="@+id/ak47_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/defendDice2"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ak47_kill_defense" />
+
 </RelativeLayout>
