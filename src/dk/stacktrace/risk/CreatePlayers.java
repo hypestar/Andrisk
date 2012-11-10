@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -61,6 +62,7 @@ public class CreatePlayers extends Activity implements OnClickListener, OnKeyLis
         
         for (EditText playerName : playerNames)
         {
+        	playerName.setTextColor(Color.parseColor("#d82323"));
         	playerName.setOnKeyListener(this);
         }
         
