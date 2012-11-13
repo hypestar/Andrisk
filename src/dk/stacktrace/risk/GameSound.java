@@ -15,6 +15,7 @@ public class GameSound
 	    public static final int ATTACK_PHASE = dk.stacktrace.risk.R.raw.attack_phase; 
 	    public static final int TROOP_DEPLOYMENT = dk.stacktrace.risk.R.raw.deployment; 
 	    public static final int REINFORCEMENT_PHASE = dk.stacktrace.risk.R.raw.reinforcement_phase; 
+	    public static final int GUNSHOT = dk.stacktrace.risk.R.raw.ak47; 
 
 	    
 	    private static SoundPool soundPool;
@@ -23,7 +24,7 @@ public class GameSound
 	    /** Populate the SoundPool*/
 	    public static void initSounds(Context context) {
 	    soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 100);
-	    soundPoolMap = new HashMap<Integer,Integer>(7);     
+	    soundPoolMap = new HashMap<Integer,Integer>(8);     
 
 	    soundPoolMap.put( DEPLOY_CLICK, soundPool.load(context, dk.stacktrace.risk.R.raw.deploy_click, 1) );
 	    soundPoolMap.put( SELECT_TERRITORY, soundPool.load(context, dk.stacktrace.risk.R.raw.select, 2) );
@@ -32,6 +33,8 @@ public class GameSound
 	    soundPoolMap.put( ATTACK_PHASE, soundPool.load(context, dk.stacktrace.risk.R.raw.attack_phase, 5) );
 	    soundPoolMap.put( TROOP_DEPLOYMENT, soundPool.load(context, dk.stacktrace.risk.R.raw.deployment, 6) );
 	    soundPoolMap.put( REINFORCEMENT_PHASE, soundPool.load(context, dk.stacktrace.risk.R.raw.reinforcement_phase, 7) );
+	    soundPoolMap.put( GUNSHOT, soundPool.load(context, dk.stacktrace.risk.R.raw.ak47, 8) );
+	    
 	    }
 	    
 	    

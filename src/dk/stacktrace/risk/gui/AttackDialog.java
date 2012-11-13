@@ -198,6 +198,7 @@ public class AttackDialog extends Dialog implements OnClickListener{
 					attackingArmy.setTextColor(Color.parseColor("#d82323"));
 				}
 				gun1stDice.setVisibility(View.VISIBLE);
+				GameSound.playSound(context, GameSound.GUNSHOT);
 			}
 			
 			if (diceNum == 1)
@@ -213,6 +214,7 @@ public class AttackDialog extends Dialog implements OnClickListener{
 					attackingArmy.setTextColor(Color.parseColor("#d82323"));
 				}
 				gun2ndDice.setVisibility(View.VISIBLE);
+				GameSound.playSound(context, GameSound.GUNSHOT);
 			}
 		}
 		
