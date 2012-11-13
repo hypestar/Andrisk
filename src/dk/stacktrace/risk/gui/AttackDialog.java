@@ -219,6 +219,8 @@ public class AttackDialog extends Dialog implements OnClickListener{
 		
 		update();
 		updateDices();
+		((Main) context).update();
+
 		if (battle.battleIsOver())
 		{
 			fightBtn.setOnClickListener(null);
@@ -233,10 +235,7 @@ public class AttackDialog extends Dialog implements OnClickListener{
 			              //((Main)context).update();
 			         } 
 			    }, 2000);
-			    
 		}
-		
-		
 	}
 	
 	

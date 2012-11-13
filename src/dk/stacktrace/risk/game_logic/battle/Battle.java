@@ -56,11 +56,15 @@ public class Battle
 			{
 				winnerDices.add(defendDices.get(i));
 				--attackingArmy;
+				attackingTerritory.getOwner().logTroopKill();
+				defendingTerritory.getOwner().logEnemyKill();
 			}
 			else
 			{
 				winnerDices.add(attackDices.get(i));
 				defendingTerritory.kill();
+				defendingTerritory.getOwner().logTroopKill();
+				attackingTerritory.getOwner().logEnemyKill();
 			}
 		}
 	}

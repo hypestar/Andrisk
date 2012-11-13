@@ -10,8 +10,9 @@ public class Player {
 	private String name;
 	//private ArrayList<Territory> territories;
 	private ArmyColor armyColor;
-	private int reinforcement;
+	private int reinforcement, numOfKilledEnemyTroops, numOfTroopsKilled;
 	private Mission mission;
+
 
 	
 	
@@ -19,6 +20,8 @@ public class Player {
 		this.name = name;
 		this.armyColor = armyColor;
 		reinforcement = 0;
+		numOfKilledEnemyTroops = 0;
+		numOfTroopsKilled = 0;
 	}
 	
 	public ArmyColor getArmyColor() {
@@ -76,6 +79,26 @@ public class Player {
 	public Mission getMission()
 	{
 		return mission;
+	}
+	
+	public void logEnemyKill()
+	{
+		numOfKilledEnemyTroops += 1; 
+	}
+	
+	public void logTroopKill()
+	{
+		numOfTroopsKilled += 1;
+	}
+	
+	public int getNumOfKilledEnemyTroops()
+	{
+		return numOfKilledEnemyTroops;
+	}
+	
+	public int getNumOfTroopsKilled()
+	{
+		return numOfTroopsKilled;
 	}
 }
 
