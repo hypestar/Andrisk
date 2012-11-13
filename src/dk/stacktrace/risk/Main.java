@@ -24,6 +24,7 @@ import dk.stacktrace.risk.gui.MissionCardButton;
 import dk.stacktrace.risk.gui.MissionCardDialog;
 import dk.stacktrace.risk.gui.MissionWinnerDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
+import dk.stacktrace.risk.gui.PlayerStats;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
 import dk.stacktrace.risk.gui.WinnerDialog;
@@ -34,6 +35,7 @@ public class Main extends Activity {
 	private ArrayList<Army> armies;
 	private RelativeLayout mainLayout;
 	private PlayerInfo playerInfo;
+	private PlayerStats playerStats;
 	private ArrayList<TerritoryHighlight> selectedTerritories;
 	private TerritoryHighlight selectedSourceTerritory, selectedTargetTerritory;
 	private DoneButton doneButton;
@@ -69,6 +71,7 @@ public class Main extends Activity {
          
         mainLayout = new RelativeLayout(this);
         playerInfo = new PlayerInfo(this, control, mainLayout);
+        playerStats = new PlayerStats(this, control, mainLayout);
         
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -125,6 +128,7 @@ public class Main extends Activity {
     public void update()
     {
     	playerInfo.update();
+    	playerStats.update();
     	updateArmies();
     	updateTerritorySelections();
     }

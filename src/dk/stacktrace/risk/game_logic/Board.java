@@ -152,6 +152,16 @@ public class Board {
 		return numOfContinents;
 	}
 	
+	public int getNumberOfTroopsOwnedBy(Player player)
+	{
+		int numOfTroopsOwned = 0;
+		for (Territory territtory : getTerritoriesOwnedBy(player))
+		{
+			numOfTroopsOwned += territtory.getArmySize();
+		}
+		return numOfTroopsOwned;
+	}
+	
 	public ArrayList<Territory> getAllTerritories()
 	{
 		ArrayList<Territory> allTerritories = new ArrayList<Territory>();

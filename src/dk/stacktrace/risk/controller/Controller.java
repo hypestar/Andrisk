@@ -413,8 +413,16 @@ public class Controller implements OnTouchListener{
 	{
 		return board.getNumberOfTerritoriesOwnedBy(player);
 	}
+	
+	public int getNumberOfContinentsOwnedBy(Player player)
+	{
+		return board.getNumberOfContinentsOwnedBy(player);
+	}
 
-
+	public int getNumberOfTroopsOwnedBy(Player player)
+	{
+		return board.getNumberOfTroopsOwnedBy(player);
+	}
 
 	public void startBattle(int attackingArmy)
 	{
