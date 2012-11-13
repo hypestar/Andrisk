@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -20,7 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CreatePlayers extends Activity implements OnClickListener, OnKeyListener {
+public class CreatePlayers extends Activity implements OnClickListener,  TextWatcher {
 
 	public final static String PLAYER1NAME = "dk.stacktrace.risk.PLAYER1";
 	public final static String PLAYER2NAME = "dk.stacktrace.risk.PLAYER2";
@@ -63,7 +65,7 @@ public class CreatePlayers extends Activity implements OnClickListener, OnKeyLis
         for (EditText playerName : playerNames)
         {
         	playerName.setTextColor(Color.parseColor("#d82323"));
-        	playerName.setOnKeyListener(this);
+        	playerName.addTextChangedListener(this);
         }
         
         battleBtn = (ImageView) findViewById(R.id.startBattleBtn);
@@ -75,12 +77,6 @@ public class CreatePlayers extends Activity implements OnClickListener, OnKeyLis
         getMenuInflater().inflate(R.menu.activity_create_players, menu);
         return true;
     }
-
-	public void onFocusChange(View v, boolean hasFocus)
-	{
-	
-		
-	}
 
 	private boolean isReadyToBattle()
 	{
@@ -109,7 +105,7 @@ public class CreatePlayers extends Activity implements OnClickListener, OnKeyLis
 		}
 	}
 
-	public boolean onKey(View v, int keyCode, KeyEvent event)
+	public void afterTextChanged(Editable s)
 	{
 		if(isReadyToBattle())
 		{
@@ -121,6 +117,18 @@ public class CreatePlayers extends Activity implements OnClickListener, OnKeyLis
 			battleBtn.setOnClickListener(null);
 			battleBtn.setImageResource(R.drawable.start_battle_btn_inactive);
 		}
-		return true;
+	}
+
+	public void beforeTextChanged(CharSequence s, int start, int count,
+			int after)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onTextChanged(CharSequence s, int start, int before, int count)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }
