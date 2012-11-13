@@ -388,6 +388,7 @@ public class Controller implements OnTouchListener{
 			GameSound.playSound(main, GameSound.TACTICAL_MOVE_PHASE);
 			resetTerritorySelections();
 			game.setGamePhase(GamePhase.TACTICALMOVE);
+			main.update();
 		}
 	}
 	
@@ -428,5 +429,10 @@ public class Controller implements OnTouchListener{
 	{
 		game.createBattle(attackingArmy);
 		main.attackDialog();
+	}
+	
+	public GamePhase getGamePhase()
+	{
+		return game.getGamePhase();
 	}
 }

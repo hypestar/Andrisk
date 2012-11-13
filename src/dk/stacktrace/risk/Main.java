@@ -20,6 +20,7 @@ import dk.stacktrace.risk.gui.AttackDialog;
 import dk.stacktrace.risk.gui.AttackSizeDialog;
 import dk.stacktrace.risk.gui.DoneButton;
 import dk.stacktrace.risk.gui.EndTurnDialog;
+import dk.stacktrace.risk.gui.GamePhaseInfo;
 import dk.stacktrace.risk.gui.MissionCardButton;
 import dk.stacktrace.risk.gui.MissionCardDialog;
 import dk.stacktrace.risk.gui.MissionWinnerDialog;
@@ -41,6 +42,7 @@ public class Main extends Activity {
 	private DoneButton doneButton;
 	private MissionCardButton missionCardButton;
 	private ArrayList<String> playerNames;
+	private GamePhaseInfo gamePhaseInfo;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,7 @@ public class Main extends Activity {
         mainLayout = new RelativeLayout(this);
         playerInfo = new PlayerInfo(this, control, mainLayout);
         playerStats = new PlayerStats(this, control, mainLayout);
+        gamePhaseInfo = new GamePhaseInfo(this, control, mainLayout);
         
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -129,6 +132,7 @@ public class Main extends Activity {
     {
     	playerInfo.update();
     	playerStats.update();
+    	gamePhaseInfo.update();
     	updateArmies();
     	updateTerritorySelections();
     }
