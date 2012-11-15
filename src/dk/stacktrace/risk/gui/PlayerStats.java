@@ -57,6 +57,7 @@ public class PlayerStats extends LinearLayout
 
 	public void update()
 	{
+		player = control.getActivePlayer();
 		numOfTerritories.setText("Territories : " + control.getNumberOfTerritoriesOwnedBy(player));
 		expectedReinforcement.setText("Expected Reinforcement : " + control.calcReinforcementBonus(player));
 		numOfContinents.setText("Continents : " + control.getNumberOfContinentsOwnedBy(player));
