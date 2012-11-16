@@ -38,6 +38,6 @@ public class MissionCardButton extends RelativeLayout
 		addView(buttonImage);
 		
 		mainLayout.addView(this);
-		setOnTouchListener(control);		
+		setOnClickListener(control);		
 	}
 }

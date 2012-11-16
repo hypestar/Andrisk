@@ -51,7 +51,7 @@ public class Army extends RelativeLayout
 		addView(armyCount, lp);
 		
 		mainLayout.addView(this);
-		setOnTouchListener(control);		
+		setOnClickListener(control);		
 	}
 	
 	public void reinforce(int numOfTroops)

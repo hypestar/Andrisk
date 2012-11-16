@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import dk.stacktrace.risk.GameSound;
 import dk.stacktrace.risk.Main;
@@ -19,7 +20,7 @@ import dk.stacktrace.risk.gui.Army;
 import dk.stacktrace.risk.gui.DoneButton;
 import dk.stacktrace.risk.gui.MissionCardButton;
 
-public class Controller implements OnTouchListener{
+public class Controller implements OnClickListener{
 	
 	private RiskGame game;
 	private Board board;
@@ -171,15 +172,7 @@ public class Controller implements OnTouchListener{
 	}
 	
 	public void setSourceTerritory(Territory source) {
-		
-		if(source != getSourceSelection())
-		{
-			game.setSourceTerritory(source);
-		}
-		else
-		{
-			game.setSourceTerritory(null);
-		}
+		game.setSourceTerritory(source);
 		GameSound.playSound(main, GameSound.SELECT_TERRITORY);
 		main.updateTerritorySelections();
 	}
@@ -204,121 +197,7 @@ public class Controller implements OnTouchListener{
 		return game.getBattle();
 	}
 
-
-	public boolean onTouch(View v, MotionEvent event) {
-		
-		if (v instanceof DoneButton && event.getAction() == MotionEvent.ACTION_DOWN)
-		{
-			if(game.initialReinforcementPhaseIsDone() && game.reinforcementPhaseIsDone())
-			{
-				main.endTurnDialog();
-				main.update();
-			}
-		}
-		
-		if (v instanceof MissionCardButton && event.getAction() == MotionEvent.ACTION_DOWN)
-		{
-			main.missionCardDialog(getActivePlayer().getMission());
-		}
-		
-		
-		if (v instanceof Army && event.getAction() == MotionEvent.ACTION_DOWN)
-		{
-			Army army = (Army) v;
-			
-			switch (game.getGamePhase()) {
-			
-			case INITIAL_REINFORCEMENT:
-				Log.v("Controller", "INITIAL_REINFORCEMENT");
-				if (army.getTerritory().getOwner().equals(getActivePlayer()))
-				{
-					GameSound.playSound(main, GameSound.DEPLOY_CLICK);
-					army.getTerritory().reinforce(getActivePlayer().deploy());
-					if(game.initialReinforcementPhaseIsDone())
-					{
-						gotoReinforcementPhase();
-						
-					}
-					endTurn();
-					main.update();
-					return true;
-				}
-				
-				break;
-				
-				
-			case REINFORCEMENT:
-				Log.v("Controller", "REINFORCEMENT");
-				if (army.getTerritory().getOwner().equals(getActivePlayer()))
-				{
-					GameSound.playSound(main, GameSound.DEPLOY_CLICK);
-					army.getTerritory().reinforce(getActivePlayer().deploy());
-					if(game.reinforcementPhaseIsDone())
-					{
-						gotoAttackPhase();
-					}
-					main.update();
-					return true;
-				}
-				break;
-				
-				
-			case ATTACK:
-				Log.v("Controller", "ATTACK");
-				if (army.getTerritory().getOwner().equals(getActivePlayer()) && army.getTerritory().getArmySize() > 1)
-				{
-					setSourceTerritory(army.getTerritory());
-					main.updateTerritorySelections();
-					return true;
-				}
-				else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && getSourceSelection() != null && army.getTerritory().isNeighbour(getSourceSelection()))
-				{
-					setTargetTerritory(army.getTerritory());
-
-					// if the attacker only has two troops then we skip the attackSizeDialog
-					if(getSourceSelection().getArmySize() == 2)
-					{
-						getSourceSelection().moveTroops(1);
-						startBattle(1);
-					}
-					else
-					{
-						main.attackSizeDialog();
-					}
-					return true;
-				}
-				return false;
-
-				
-			case TACTICALMOVE:
-				Log.v("Controller", "TACTICALMOVE");
-				if (army.getTerritory().getOwner().equals(getActivePlayer()))
-				{
-					
-					if(getSourceSelection() == null || getSourceSelection() == army.getTerritory())
-					{
-						setSourceTerritory(army.getTerritory());
-					}
-					else if (getSourceSelection().isNeighbour(army.getTerritory()))
-					{
-						setTargetTerritory(army.getTerritory());
-						main.tacticalMoveDialog(getSourceSelection(), getTargetSelection());
-					}
-					return true;
-				}
-				break;
-
-			default:
-				break;
-			}
-		}
-		
-		
-		//////////////////////////////
-		
-		return false;
-	}
-
+	
 	public void retreat()
 	{
 		Battle battle = game.getBattle();
@@ -370,14 +249,13 @@ public class Controller implements OnTouchListener{
 			Log.v(getActivePlayer().getName() + "'s mission", "" + getActivePlayer().getMission().getMissionDescription());
 			main.missionWinnerDialog();
 		}
-		
-		Log.v("MISSION CARD", getActivePlayer().getName() + "'s mission : " + getActivePlayer().getMission().getMissionDescription());
 	}
 	
 	private void gotoIntitialReinforcementPhase()
 	{
 		game.setInitialReinforcementForAllPlayers();
 		game.setGamePhase(GamePhase.INITIAL_REINFORCEMENT);
+		GameSound.playSound(main, GameSound.TROOP_DEPLOYMENT);
 		
 	}
 	
@@ -434,5 +312,134 @@ public class Controller implements OnTouchListener{
 	public GamePhase getGamePhase()
 	{
 		return game.getGamePhase();
+	}
+
+	public boolean playerIsAbleToMove()
+	{
+		return board.isAbleToMove(getActivePlayer());
+	}
+
+	public void onClick(View v)
+	{
+		
+		if(v instanceof Army)
+		{
+			Army army = (Army) v; 
+			switch (getGamePhase())
+			{
+			case INITIAL_REINFORCEMENT:
+				initialReinforcementHandler(army);
+				break;
+			case REINFORCEMENT:
+				reinforcementHandler(army);
+				break;
+			case ATTACK:
+				attackHandler(army);
+				break;
+			case TACTICALMOVE:
+				tacticalMoveHandler(army);
+			default:
+				break;
+			}
+		}
+		
+		else if (v instanceof DoneButton)
+		{
+			if(game.initialReinforcementPhaseIsDone() && game.reinforcementPhaseIsDone())
+			{
+				main.endTurnDialog();
+				main.update();
+			}
+		}
+		
+		else if (v instanceof MissionCardButton)
+		{
+			main.missionCardDialog(getActivePlayer().getMission());
+		}
+	}
+	
+	
+	private void tacticalMoveHandler(Army army)
+	{
+		if (army.getTerritory().getOwner().equals(getActivePlayer()))
+		{
+			if((getSourceSelection() == null && army.getTerritory().getArmySize() > 1))
+			{
+				setSourceTerritory(army.getTerritory());
+			}
+			// if clicked on source then deselect source
+			else if (getSourceSelection() == army.getTerritory())
+			{
+				setSourceTerritory(null);
+			}
+			// if source is set and the territory is neighbour then we got a valid target 
+			else if (getSourceSelection() != null && getSourceSelection().isNeighbour(army.getTerritory()))
+			{
+				setTargetTerritory(army.getTerritory());
+				// if the source territory have 2 armies - skip tacticalmove dialog
+				if (getSourceSelection().getArmySize() == 2)
+				{
+					tacticalMove(getSourceSelection(), getTargetSelection(), 1);
+					main.updateArmies();
+					return;
+				}
+				main.tacticalMoveDialog(getSourceSelection(), getTargetSelection());
+			}
+		}
+	}
+
+
+	private void attackHandler(Army army)
+	{
+		if (army.getTerritory().getOwner().equals(getActivePlayer()) && army.getTerritory().getArmySize() > 1)
+		{
+			setSourceTerritory(army.getTerritory());
+			main.updateTerritorySelections();
+		}
+		else if (!army.getTerritory().getOwner().equals(getActivePlayer()) && getSourceSelection() != null && army.getTerritory().isNeighbour(getSourceSelection()))
+		{
+			setTargetTerritory(army.getTerritory());
+
+			// if the attacker only has two troops then we skip the attackSizeDialog
+			if(getSourceSelection().getArmySize() == 2)
+			{
+				getSourceSelection().moveTroops(1);
+				startBattle(1);
+			}
+			else
+			{
+				main.attackSizeDialog();
+			}
+		}
+	}
+
+	
+	private void reinforcementHandler(Army army)
+	{
+		if (army.getTerritory().getOwner().equals(getActivePlayer()))
+		{
+			GameSound.playSound(main, GameSound.DEPLOY_CLICK);
+			army.getTerritory().reinforce(getActivePlayer().deploy());
+			if(game.reinforcementPhaseIsDone())
+			{
+				gotoAttackPhase();
+			}
+			main.update();
+		}
+	}
+
+	private void initialReinforcementHandler(Army army)
+	{
+		if (army.getTerritory().getOwner().equals(getActivePlayer()))
+		{
+			GameSound.playSound(main, GameSound.DEPLOY_CLICK);
+			army.getTerritory().reinforce(getActivePlayer().deploy());
+			if(game.initialReinforcementPhaseIsDone())
+			{
+				gotoReinforcementPhase();
+			}
+			endTurn();
+			main.update();
+		}
 	}
 }

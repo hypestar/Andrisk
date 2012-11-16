@@ -26,15 +26,14 @@ public class GameSound
 	    soundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 100);
 	    soundPoolMap = new HashMap<Integer,Integer>(8);     
 
+	    soundPoolMap.put( TROOP_DEPLOYMENT, soundPool.load(context, dk.stacktrace.risk.R.raw.deployment, 6) );
+	    soundPoolMap.put( ATTACK_PHASE, soundPool.load(context, dk.stacktrace.risk.R.raw.attack_phase, 5) );
 	    soundPoolMap.put( DEPLOY_CLICK, soundPool.load(context, dk.stacktrace.risk.R.raw.deploy_click, 1) );
 	    soundPoolMap.put( SELECT_TERRITORY, soundPool.load(context, dk.stacktrace.risk.R.raw.select, 2) );
 	    soundPoolMap.put( VICTORY, soundPool.load(context, dk.stacktrace.risk.R.raw.victory, 3) );
 	    soundPoolMap.put( TACTICAL_MOVE_PHASE, soundPool.load(context, dk.stacktrace.risk.R.raw.tactical_move_phase, 4) );
-	    soundPoolMap.put( ATTACK_PHASE, soundPool.load(context, dk.stacktrace.risk.R.raw.attack_phase, 5) );
-	    soundPoolMap.put( TROOP_DEPLOYMENT, soundPool.load(context, dk.stacktrace.risk.R.raw.deployment, 6) );
 	    soundPoolMap.put( REINFORCEMENT_PHASE, soundPool.load(context, dk.stacktrace.risk.R.raw.reinforcement_phase, 7) );
 	    soundPoolMap.put( GUNSHOT, soundPool.load(context, dk.stacktrace.risk.R.raw.ak47, 8) );
-	    
 	    }
 	    
 	    

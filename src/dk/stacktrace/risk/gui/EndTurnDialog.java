@@ -45,8 +45,13 @@ public class EndTurnDialog extends Dialog implements OnClickListener{
 		setContentView(layout);
 		setTitle("End turn ?");	
 		
+		
 		tacticalMoveBtn = (Button) findViewById(R.id.tacticalMoveBtn1);
 		tacticalMoveBtn.setOnClickListener(this);
+		if (!control.playerIsAbleToMove())
+		{
+			tacticalMoveBtn.setVisibility(View.INVISIBLE);	
+		}
 		
 		endTurnBtn = (Button) findViewById(R.id.endTurnBtn1);
 		endTurnBtn.setOnClickListener(this);

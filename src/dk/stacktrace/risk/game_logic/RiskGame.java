@@ -31,8 +31,6 @@ public class RiskGame {
 		targetTerritory = null;
 		battle = null;
 		gameWinner = null;
-		
-		
 	}
 	
 	

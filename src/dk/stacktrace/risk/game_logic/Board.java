@@ -217,4 +217,25 @@ public class Board {
 		return missions;
 	}
 	
+	public boolean isAbleToMove(Player player)
+	{
+		ArrayList<Territory> playersTerritories = getTerritoriesOwnedBy(player);
+		ArrayList<Territory> neighbours;
+		
+		for (Territory territory : playersTerritories)
+		{
+			if(territory.getArmySize() > 1)
+			{
+				neighbours = territory.getNeighbours();
+				for (Territory neighbour : neighbours)
+				{
+					if (neighbour.getOwner().equals(player))
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 }
