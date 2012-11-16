@@ -26,6 +26,7 @@ import dk.stacktrace.risk.gui.MissionCardDialog;
 import dk.stacktrace.risk.gui.MissionWinnerDialog;
 import dk.stacktrace.risk.gui.PlayerInfo;
 import dk.stacktrace.risk.gui.PlayerStats;
+import dk.stacktrace.risk.gui.QuitGameDialog;
 import dk.stacktrace.risk.gui.TacticalMoveDialog;
 import dk.stacktrace.risk.gui.TerritoryHighlight;
 import dk.stacktrace.risk.gui.WinnerDialog;
@@ -97,8 +98,7 @@ public class Main extends Activity {
     
     @Override
     public void onBackPressed() {
-       Log.d("CDA", "onBackPressed Called");
-       
+    	(new QuitGameDialog(this, control, (ViewGroup)getWindow().getCurrentFocus())).show();
     }
 
     public void rematch()
