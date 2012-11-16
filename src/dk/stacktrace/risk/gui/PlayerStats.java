@@ -63,9 +63,7 @@ public class PlayerStats extends LinearLayout
 		numOfContinents.setText("Continents : " + control.getNumberOfContinentsOwnedBy(player));
 		numOfTroopsToDeploy.setText("Troops to deploy : " + player.getNumOfTroopsToDeploy());
 		numOfTroopsOwned.setText("Troops : " + control.getNumberOfTroopsOwnedBy(player));
-		playersTroopsKilled.setText("Troops killed : " + player.getNumOfTroopsKilled());
-		troopsKilledByPlayer.setText("Fallen troops : " + player.getNumOfKilledEnemyTroops());
+		playersTroopsKilled.setText("Troops killed : " + player.getNumOfKilledEnemyTroops());
+		troopsKilledByPlayer.setText("Fallen troops : " + player.getNumOfTroopsKilled());
 	}
-
-	
 }

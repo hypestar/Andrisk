@@ -118,17 +118,7 @@ public class Main extends Activity {
     		armies.add(new Army(this, territory, mainLayout, control));
     	}
 	}
-    
-    private void createTerritoryHighlight()
-    {
-    	ArrayList<Territory> allTerritories = control.getAllTerritories();
-    	selectedTerritories = new ArrayList<TerritoryHighlight>();
-    	
-    	for(Territory territory : allTerritories)
-    	{
-    		selectedTerritories.add(new TerritoryHighlight(this, territory, mainLayout));
-    	}
-    }
+
     
     public PlayerInfo getPlayerInfo() {
 		return playerInfo;

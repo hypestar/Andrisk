@@ -2,17 +2,21 @@ package dk.stacktrace.risk;
 
 import java.util.ArrayList;
 
+import dk.stacktrace.risk.gui.QuitGameDialog;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Process;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnKeyListener;
@@ -72,6 +76,7 @@ public class CreatePlayers extends Activity implements OnClickListener,  TextWat
         battleBtn.setOnClickListener(this);
     }
 
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_create_players, menu);
