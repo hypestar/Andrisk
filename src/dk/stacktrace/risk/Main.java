@@ -94,6 +94,12 @@ public class Main extends Activity {
         selectedTargetTerritory = null;
         setContentView(mainLayout);
     }
+    
+    @Override
+    public void onBackPressed() {
+       Log.d("CDA", "onBackPressed Called");
+       
+    }
 
     public void rematch()
     {
